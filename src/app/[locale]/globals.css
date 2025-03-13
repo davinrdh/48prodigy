@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #1AAB8E;
+  --secondary: #060522;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.backgorund {
+  background: url('/overlay.png'), linear-gradient(30deg, #729dde 50%, #729dde 50%, #ffffff 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff !important;
+  width: 100%;
+  margin-top: -6.5rem;
+  padding-top: 5rem;
+}
+
+.backgorund2 {
+  background: url('/overlay.png'), linear-gradient(30deg, #729dde 50%, #729dde 50%, #ffffff 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff !important;
+  width: 100%;
+  margin-top: -6.5rem;
+  padding-top: 5rem;
+}
+
+.overflow {
+  margin-top: -10rem;
+  background-color: var(--background);
+}
+
+@media (max-width: 640px) {
+  .overflow {
+    margin-top: 0;
+    margin-bottom: 3.5rem;
+  }
+}
+
+.btn-primary {
+  padding: 1rem 2rem;
+  background-color: var(--primary);
+  border-radius: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.txt-hero-xl {
+  font-weight: 600;
+  font-size: 4rem;
+  line-height: 5.7rem;
+}
+.txt-hero-lg {
+  font-weight: 600;
+  font-size: 3.3rem;
+  line-height: 5rem;
+}
+.txt-hero-md {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.background-muted {
+  background-color: #f1f1f1;
+  color: var(--primary);
+}
+input[type="date"]:not(.has-value):before{
+  color: gray;
+  content: attr(placeholder);
+  padding-right: 1rem;
+  display: inline;
+  width: 100%;
+}
+input[type='date'] {
+  -webkit-min-logical-width: calc(100% - 16px);
+  width: 100%;
+
+}

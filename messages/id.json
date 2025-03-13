@@ -1,0 +1,62 @@
+{
+    "Index": {
+        "title": "Hello Dunia",
+        "product": "Produk",
+        "readMore": "Baca Lebih Lanjut"
+    },
+    "Navbar": {
+        "listNavbar": [
+            {
+                "href": "/",
+                "label": "Beranda"
+            },
+            {
+                "href": "/about",
+                "label": "Tentang Kami"
+            },
+            {
+                "href": "/contact",
+                "label": "Kontak"
+            },
+            {
+                "href": "/product",
+                "label": "Produk"
+            }
+        ]
+    },
+    "Landing": {
+        "title": "Landing",
+        "hero1": "Untuk individu dan keluarga",
+        "hero2": "Asuransi Kesehatan Internasional di Indonesia",
+        "listHero": {
+            "desc1": "Jaminan perpanjangan polis setiap tahun",
+            "desc2": "Semua layanan digital tersedia dalam aplikasi",
+            "desc3": "Dukungan ahli 24/7 di seluruh dunia untuk perjalanan medis Anda"
+        }
+    },
+    "Home": {
+        "title": "Home",
+        "insurance": "dari msiglifeindonesia",
+        "hero1": "Asuransi Kesehatan Internasional: Mudah, Praktis, dan Bebas Khawatir.",
+        "listHero": {
+            "desc1": "Jaminan perpanjangan polis setiap tahun",
+            "desc2": "Semua layanan digital tersedia dalam aplikasi",
+            "desc3": "Dukungan ahli 24/7 di seluruh dunia untuk perjalanan medis Anda"
+        },
+        "hero2": "Perlindungan Cerdas yang Dirancang untuk Anda!",
+        "btnMore": "Lebih banyak perlindungan"
+    },
+    "AboutUs": {
+        "desc1": "PT MSIG Life Insurance Indonesia Tbk (juga dikenal sebagai MSIG Life) telah meramaikan industri asuransi jiwa nasional sejak 14 April 1985. Berdiri sebagai PT Asuransi Jiwa Purnamala Internasional Indonesia (PII) lalu menjalani dua kali proses transformasi, MSIG Life hadir sebagai perusahaan joint venture antara PT Sinar Mas Multiartha Tbk dan grup asuransi raksasa Jepang, Mitsui Sumitomo Insurance Co., Ltd. pada tahun 2011.",
+        "desc2": "MSIG Life resmi menjadi perusahaan terbuka pada 28 Juni 2019 dengan nama PT Asuransi Jiwa Sinarmas MSIG Tbk. Pada tanggal 9 Juli 2019, saham MSIG Life (kode saham: LIFE) mulai melantai di Bursa Efek Indonesia. Bersamaan dengan itu, Mitsui Sumitomo Insurance Co., Ltd. (MSI) resmi menjadi pemegang saham utama dengan komposisi kepemilikan saham Mitsui Sumitomo Insurance Co., Ltd. (80%), PT Sinar Mas Multiartha Tbk (12,5%) dan publik (7,5%). Seiring dengan perubahan komposisi pemegang saham, perusahaan berganti nama menjadi PT MSIG Life Insurance Indonesia Tbk (MSIG Life) pada kuartal akhir 2023.",
+        "desc3": "Mitsui Sumitomo Insurance Co., Ltd. merupakan anak perusahaan MS&AD Insurance Group Holdings, Inc. MS&AD memegang pangsa terbesar premi asuransi umum di Jepang dan tercatat dalam 10 besar bisnis grup asuransi di dunia",
+        "visi": "Menciptakan grup usaha asuransi dan jasa keuangan terkemuka di duniasecara berkelanjutan mengusahakan pertumbuhan serta meningkatkan nilai perusahaan.",
+        "misi": "Memberikan kontribusi bagi pengembangan masyarakat yang dinamis dan turut serta menjaga masa depan bumi, dengan memberikan keamanan dan ketenangan pikiran melalui usaha asuransi dan jasa keuangan global."
+    },
+    "Contact": {
+        "hero1": "Kontak Kami",
+        "heroDesc1": "Kami siap membantu Anda! Jika Anda memiliki pertanyaan mengenai produk asuransi kami, ingin berkonsultasi mengenai perlindungan yang sesuai, atau membutuhkan informasi lebih lanjut, jangan ragu untuk menghubungi kami.",
+        "hero2": "Kami ada untuk anda",
+        "heroDesc2": "Jika Anda ingin menghubungi kami, kami akan senang mendengar pendapat Anda!"
+    }
+}

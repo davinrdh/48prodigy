@@ -1,0 +1,62 @@
+{
+    "Index": {
+        "title": "Hello World",
+        "product": "Product",
+        "readMore": "Read More"
+    },
+    "Navbar": {
+        "listNavbar": [
+            {
+                "href": "/",
+                "label": "Home"
+            },
+            {
+                "href": "/about",
+                "label": "About Us"
+            },
+            {
+                "href": "/contact",
+                "label": "Contact"
+            },
+            {
+                "href": "/product",
+                "label": "Product"
+            }
+        ]
+    },
+    "Landing": {
+        "title": "Landing",
+        "hero1": "For individual and families",
+        "hero2": "International Health Insurance in Indonesia",
+        "listHero": {
+            "desc1": "Guarantee renewal policy every year",
+            "desc2": "All your digital services available on the app",
+            "desc3": "24/7 worldwide expert support for your medical journey"
+        }
+    },
+    "Home": {
+        "title": "Home",
+        "insurance": "by msiglifeindonesia",
+        "hero1": "International health insurance: simplified for your peace of mind.",
+        "listHero": {
+            "desc1": "Guarantee renewal policy every year",
+            "desc2": "All your digital services available on the app",
+            "desc3": "24/7 worldwide expert support for your medical journey"
+        },
+        "hero2": "Smart Protection Built Around You!",
+        "btnMore": "More Protection"
+    },
+    "AboutUs": {
+        "desc1": "PT MSIG Life Insurance Indonesia Tbk (also known as MSIG Life) has been a part of the national life insurance industry since April 14, 1985. Initially established as PT Asuransi Jiwa Purnamala Internasional Indonesia (PII), the company underwent two transformation processes before becoming a joint venture between PT Sinar Mas Multiartha Tbk and the Japanese insurance giant, Mitsui Sumitomo Insurance Co., Ltd., in 2011.",
+        "desc2": "MSIG Life officially became a publicly listed company on June 28, 2019, under the name PT Asuransi Jiwa Sinarmas MSIG Tbk. On July 9, 2019, MSIG Life shares (stock code: LIFE) were officially listed on the Indonesia Stock Exchange. At the same time, Mitsui Sumitomo Insurance Co., Ltd. (MSI) became the majority shareholder with a shareholding composition of Mitsui Sumitomo Insurance Co., Ltd. (80%), PT Sinar Mas Multiartha Tbk (12.5%), and the public (7.5%). Following changes in the shareholder composition, the company was renamed PT MSIG Life Insurance Indonesia Tbk (MSIG Life) in the last quarter of 2023.",
+        "desc3": "Mitsui Sumitomo Insurance Co., Ltd. is a subsidiary of MS&AD Insurance Group Holdings, Inc. MS&AD holds the largest share of general insurance premiums in Japan and is ranked among the world's top 10 insurance groups.",
+        "visi": "To create a leading global insurance and financial services group that sustainably pursues growth and enhances corporate value.",
+        "misi": "To contribute to the development of a dynamic society and help protect the future of the planet by providing security and peace of mind through global insurance and financial services."
+    },
+    "Contact": {
+        "hero1": "Contact Us",
+        "heroDesc1": "We are ready to assist you! If you have any questions about our insurance products, would like to consult about the right coverage, or need more information, please don't hesitate to contact us.",
+        "hero2": "We are here for you",
+        "heroDesc2": "Feel free to reach out we'd love to hear your thoughts and assist you in any way we can!"
+    }
+}
