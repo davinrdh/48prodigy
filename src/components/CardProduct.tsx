@@ -22,7 +22,7 @@ export default function CardProduct({
   const locale = params?.locale;
   return (
     <div>
-      <div className="bg-white border border-gray-200 rounded-3xl shadow-sm overflow-hidden">
+      <div className="bg-[var(--primary)] rounded-3xl shadow-sm overflow-hidden">
         <div
           className="overflow-hidden"
           style={{ borderBottomRightRadius: "7.5rem" }}
@@ -52,10 +52,10 @@ export default function CardProduct({
           </p>
 
           <Link
-            href={`/${locale}/product/${linkProduct}`}
-            className="block px-5 py-3 w-full text-sm font-medium text-center text-white bg-[var(--primary)] rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-current"
+            href={`/${locale}/booking/${linkProduct}`}
+            className="btn-primary"
           >
-            {locale == "en" ? "Read More" : "Baca Lebih Lanjut"}
+            {locale == "en" ? "Booking Now" : "Pesan Sekarang"}
           </Link>
         </div>
       </div>

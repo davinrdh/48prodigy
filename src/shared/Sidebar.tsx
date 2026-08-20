@@ -35,15 +35,15 @@ export default function Sidebar({
   return (
     <>
       <div
-        className={`sidebar overflow-hidden fixed w-80 h-full left-0 z-40 top-0 bg-white backdrop-sepia-50 md:hidden transition-transform duration-300 ease-in-out ${
+        className={`sidebar overflow-hidden fixed w-80 h-full left-0 z-40 top-0 bg-[var(--primary)] backdrop-sepia-50 md:hidden transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex justify-between p-3 mb-3 border">
+        <div className="flex justify-between p-3 mb-3 border-b border-[var(--background)]">
           <div className="flex">
             <Link href="" className="brand" onClick={() => setIsOpen(false)}>
               <Image
-                src="/logo.svg"
+                src="/logo-transparant2.png"
                 alt="IndoexpatsInsurance"
                 width={50}
                 height={45}
@@ -55,10 +55,7 @@ export default function Sidebar({
               onClick={() => setIsOpen(false)}
             >
               <div>
-                <p className="m-0 font-semibold text-sm">IndoexpatsInsurance</p>
-                <p style={{ fontSize: "8px", color: "var(--primary)" }}>
-                  by msiglifeindonesia
-                </p>
+                {/* <h3 className="m-0 font-semibold text-2xl ms-3">48Prodigy</h3> */}
               </div>
             </Link>
           </div>

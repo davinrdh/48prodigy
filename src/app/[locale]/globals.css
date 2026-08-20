@@ -3,35 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #1AAB8E;
-  --secondary: #060522;
+  --background: #2D1515;
+  --foreground: ##fdfdfd;
+  --primary: #3D1C1C;
+  --secondary: #ff3131;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #2D1515;
+    --foreground: #fdfdfd;
   }
 }
 
 body {
-  color: var(--foreground);
+  color: var(--foreground) !important;
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.backgorund {
-  background: url('/overlay.png'), linear-gradient(30deg, #729dde 50%, #729dde 50%, #ffffff 100%);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* .backgorund {
   color: #ffffff !important;
   width: 100%;
   margin-top: -6.5rem;
   padding-top: 5rem;
-}
+} */
 
 .backgorund2 {
   background: url('/overlay.png'), linear-gradient(30deg, #729dde 50%, #729dde 50%, #ffffff 100%);
@@ -95,4 +91,53 @@ input[type='date'] {
   -webkit-min-logical-width: calc(100% - 16px);
   width: 100%;
 
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1.25px; /* px-5 setara dengan 1.25rem */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  text-align: center;
+  color: #ffffff;
+  background-color: var(--secondary);
+  border-radius: 0.5rem; /* rounded-lg */
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #c72222;
+  box-shadow: 0 4px 15px rgba(199, 34, 34, 0.4);
+  transform: translateY(-2px);
+}
+
+.beam-border {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(    from 0deg,    transparent 0%,    transparent 85%,    var(--secondary) 92%,    transparent 100%  );
+  animation: beam-spin 10s linear infinite;
+  -webkit-animation: beam-spin 10s linear infinite;
+}
+
+.max-w-sm:nth-child(1) .beam-border { animation-delay: 0s; }
+.max-w-sm:nth-child(2) .beam-border { animation-delay: 1s; }
+.max-w-sm:nth-child(3) .beam-border { animation-delay: 2s; }
+.max-w-sm:nth-child(4) .beam-border { animation-delay: 3s; }
+
+@keyframes beam-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* globals.css */
+.organic-frame {
+  border-radius: 20px 20px 20px 80px;
+}
+
+@media (min-width: 768px) {
+  .organic-frame {
+    border-radius: 24px 24px 24px 140px;
+  }
 }
