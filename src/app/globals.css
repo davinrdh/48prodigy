@@ -3,15 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #1AAB8E;
+  --background: #771717;
+  --foreground: ##fdfdfd;
+  --primary: #ff3131;
+  --secondary: #ff3131;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #fdfdfd;
   }
 }
 
@@ -21,7 +22,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.backgorund {
+/* .backgorund {
   background: url('/overlay.png'), linear-gradient(30deg, #729dde 50%, #729dde 50%, #ffffff 100%);
   background-size: cover;
   background-position: center;
@@ -41,7 +42,7 @@ body {
   width: 100%;
   margin-top: -6.5rem;
   padding-top: 5rem;
-}
+} */
 
 .overflow {
   margin-top: -10rem;

@@ -32,18 +32,18 @@ export default function Navbar() {
 
   const navLinkEn = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
-    { href: "/contact", label: "Contact" },
-    { href: "/product", label: "Product" },
-    { href: "/landing", label: "Landing" },
+    { href: "/booking", label: "Booking" },
+    { href: "/pricelist", label: "Price List" },
+    { href: "/tickets", label: "Ticket Info" },
+    { href: "/testimoni", label: "Reviews" },
   ];
 
   const navLinkId = [
     { href: "/", label: "Beranda" },
-    { href: "/about", label: "Tentang Kami" },
-    { href: "/contact", label: "Kontak" },
-    { href: "/product", label: "Produk" },
-    { href: "/landing", label: "Landing" },
+    { href: "/booking", label: "Pesan" },
+    { href: "/pricelist", label: "Daftar Harga" },
+    { href: "/tickets", label: "Informasi Tiket" },
+    { href: "/testimoni", label: "Ulasan" },
   ];
 
   const navLink = currentLocale == "en" ? navLinkEn : navLinkId;
@@ -70,47 +70,24 @@ export default function Navbar() {
         currentLocale={currentLocale}
         handleLocaleChange={handleLocaleChange}
       />
-      {pathname !== `/${currentLocale}/landing` && (
-        <div className="fixed bottom-5 right-5 md:hidden z-10">
-          <ButtonCall />
-        </div>
-      )}
       <div className="sticky top-0 z-10">
         <div className="navbar">
           <div className="flex justify-between w-full">
-            <div className="flex">
-              <Link href="/" locale={currentLocale} className="brand">
+            <Link href="/" locale={currentLocale} className="brand">
                 <Image
-                  src="/logo.svg"
+                  src="/logo-transparant2.png"
                   alt="IndoexpatsInsurance"
                   width={85}
                   height={80}
                 />
               </Link>
-              {pathname !== `/${currentLocale}/landing` && (
-                <Link
-                  href="/"
-                  locale={currentLocale}
-                  className="flex items-center ms-3 text-brand md:hidden"
-                >
-                  <div>
-                    <h6 className="m-0 font-semibold">IndoexpatsInsurance</h6>
-                    <p
-                      style={{
-                        fontSize: "10px",
-                        color: "var(--primary)",
-                      }}
-                    >
-                      by msiglifeindonesia
-                    </p>
-                  </div>
-                </Link>
-              )}
+            <div className="flex gap-5">
+              
               {pathname === `/${currentLocale}/landing` ? (
                 <Link
                   href="/"
                   locale={currentLocale}
-                  className="flex items-center ms-3 text-brand"
+                  className="flex items-center text-brand"
                 >
                   <div>
                     <h6 className="m-0 font-semibold">IndoexpatsInsurance</h6>
@@ -125,7 +102,7 @@ export default function Navbar() {
                   </div>
                 </Link>
               ) : (
-                <div className="ms-3 flex items-center">
+                <div className="flex items-center">
                   <div>
                     {navLink.map((link, index) => (
                       <Link
@@ -136,10 +113,10 @@ export default function Navbar() {
                           pathname ===
                             `/${currentLocale}${link.href.replace(
                               /\/$/,
-                              ""
+                              "",
                             )}` ||
                           (pathname.startsWith(
-                            `/${currentLocale}${link.href}`
+                            `/${currentLocale}${link.href}`,
                           ) &&
                             link.href !== "/")
                             ? "nav-link active"
@@ -163,11 +140,11 @@ export default function Navbar() {
               </div>
             )}
             <div
-              className={`md:block ${
+              className={`md:block p-[1.49rem] ${
                 pathname !== `/${currentLocale}/landing` && "hidden"
               }`}
             >
-              <div className="flex gap-3 items-center">
+              <div className="flex items-center">
                 {pathname !== `/${currentLocale}/landing` && (
                   <ButtonTranslate
                     currentLocale={currentLocale}
@@ -175,7 +152,7 @@ export default function Navbar() {
                   />
                 )}
 
-                <ButtonCall />
+                {/* <ButtonCall /> */}
               </div>
             </div>
           </div>
