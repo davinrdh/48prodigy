@@ -6,11 +6,22 @@
   },
   "Navbar": {
     "listNavbar": [
-      { "href": "/", "label": "Beranda" },
-      { "href": "/booking", "label": "Pesan" },
-      { "href": "/pricelist", "label": "Daftar Harga" },
-      { "href": "/tickets", "label": "Informasi Tiket" },
-      { "href": "/testimoni", "label": "Ulasan" }
+      {
+        "href": "/",
+        "label": "Beranda"
+      },
+      {
+        "href": "/about",
+        "label": "Tentang Kami"
+      },
+      {
+        "href": "/contact",
+        "label": "Kontak"
+      },
+      {
+        "href": "/product",
+        "label": "Produk"
+      }
     ]
   },
   "Landing": {
