@@ -6,22 +6,11 @@
   },
   "Navbar": {
     "listNavbar": [
-      {
-        "href": "/",
-        "label": "Home"
-      },
-      {
-        "href": "/about",
-        "label": "About Us"
-      },
-      {
-        "href": "/contact",
-        "label": "Contact"
-      },
-      {
-        "href": "/product",
-        "label": "Product"
-      }
+      { "href": "/", "label": "Home" },
+      { "href": "/booking", "label": "Booking" },
+      { "href": "/pricelist", "label": "Price List" },
+      { "href": "/tickets", "label": "Ticket Info" },
+      { "href": "/testimoni", "label": "Reviews" }
     ]
   },
   "Landing": {
