@@ -9,9 +9,9 @@ interface btnIntl{
 export default function ButtonTranslate({currentLocale, handleLocaleChange} : btnIntl) {
     return (
         <div>
-            <div className="flex gap-2 text-sm text-center">
+            <div className="flex gap-2 text-sm text-center text-white">
                 <button
-                    className={`cursor-pointer font-light ${currentLocale === "en" ? "text-[var(--primary)] font-medium" : "text-slate-300"
+                    className={`cursor-pointer font-light ${currentLocale === "en" ? "text-[var(--secondary)] font-medium" : "text-slate-300"
                         }`}
                     onClick={() => handleLocaleChange("en")}
                 >
@@ -19,7 +19,7 @@ export default function ButtonTranslate({currentLocale, handleLocaleChange} : bt
                 </button>
                 |
                 <button
-                    className={`cursor-pointer font-light ${currentLocale === "id" ? "text-[var(--primary)] font-medium" : "text-slate-300"
+                    className={`cursor-pointer font-light ${currentLocale === "id" ? "text-[var(--secondary)] font-medium" : "text-slate-300"
                         }`}
                     onClick={() => handleLocaleChange("id")}
                 >
