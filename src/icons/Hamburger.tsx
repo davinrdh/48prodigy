@@ -11,21 +11,21 @@ export default function Hamburger() {
     >
       <path
         d="M1 8H15"
-        stroke="#51526C"
+        stroke="currentColor"
         strokeWidth="1.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M1 14H15"
-        stroke="#51526C"
+        stroke="currentColor"
         strokeWidth="1.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M1 2H15"
-        stroke="#51526C"
+        stroke="currentColor"
         strokeWidth="1.2"
         strokeLinecap="round"
         strokeLinejoin="round"
