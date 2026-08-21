@@ -2,10 +2,10 @@
 "use client";
 
 import { useState } from "react";
-import type { JokiKonserBookingForm } from "@/types/booking";
+import type { GeneralConcertForm } from "@/types/booking";
 
 export default function BookingFormJokiKonser() {
-  const [form, setForm] = useState<JokiKonserBookingForm>({
+  const [form, setForm] = useState<GeneralConcertForm>({
     namaEvent: "",
     namaLengkap: "",
     email: "",
@@ -14,7 +14,7 @@ export default function BookingFormJokiKonser() {
   });
   const [submitting, setSubmitting] = useState(false);
 
-  function handleChange<K extends keyof JokiKonserBookingForm>(key: K, value: JokiKonserBookingForm[K]) {
+  function handleChange<K extends keyof GeneralConcertForm>(key: K, value: GeneralConcertForm[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 

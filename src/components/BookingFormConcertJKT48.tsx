@@ -2,12 +2,12 @@
 "use client";
 
 import { useState } from "react";
-import type { ConcertBookingForm } from "@/types/booking";
+import type { JKT48ConcertForm } from "@/types/booking";
 
 const kategoriOptions = ["Festival", "Tribun Reguler", "Tribun VIP", "VVIP"];
 
 export default function BookingFormConcert() {
-  const [form, setForm] = useState<ConcertBookingForm>({
+  const [form, setForm] = useState<JKT48ConcertForm>({
     kategoriKursi: "",
     jumlahTiket: 1,
     namaLengkap: "",
@@ -16,7 +16,7 @@ export default function BookingFormConcert() {
   });
   const [submitting, setSubmitting] = useState(false);
 
-  function handleChange<K extends keyof ConcertBookingForm>(key: K, value: ConcertBookingForm[K]) {
+  function handleChange<K extends keyof JKT48ConcertForm>(key: K, value: JKT48ConcertForm[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
