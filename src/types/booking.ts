@@ -22,3 +22,18 @@ export interface ExclusiveBookingForm {
   password: string;
   noWa: string;
 }
+
+export interface JKT48ConcertForm {
+  kategoriKursi: string;
+  jumlahTiket: number;
+  namaLengkap: string;
+  email: string;
+  noHp: string;
+}
+export interface GeneralConcertForm {
+  namaEvent: string;
+  namaLengkap: string;
+  email: string;
+  noHp: string;
+  noKtp: string;
+}
