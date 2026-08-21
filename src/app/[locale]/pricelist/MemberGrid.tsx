@@ -25,37 +25,63 @@ interface MemberGridProps {
   defaultPrice: MemberPrice;
 }
 
+const typeOrder: Record<string, number> = {
+  LOVE: 1,
+  DREAM: 2,
+  PASSION: 3,
+  TRAINEE: 4,
+};
+
+function getTypeOrder(type: string): number {
+  return typeOrder[type] ?? 99;
+}
+
+const categoryLabels: Record<string, string> = {
+  vc: "VC",
+  twoShot: "Two Shot",
+  mng: "MNG",
+};
+
 export default function MemberGrid({
   members,
   prices,
   defaultPrice,
 }: MemberGridProps) {
-  const { query } = useSearch();
+  const { query, activeCategory, activeTeam } = useSearch();
   const [debouncedQuery, setDebouncedQuery] = useState(query);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedQuery(query);
-    }, 1500);
-
+    const timer = setTimeout(() => setDebouncedQuery(query), 1500);
     return () => clearTimeout(timer);
   }, [query]);
 
   const filteredMembers = useMemo(() => {
-    if (!debouncedQuery.trim()) return members;
-    const lowerQuery = debouncedQuery.toLowerCase().trim();
-    return members.filter(
-      (item) =>
-        item.name.toLowerCase().includes(lowerQuery) ||
-        item.nickname.toLowerCase().includes(lowerQuery),
+    let result = members;
+
+    if (debouncedQuery.trim()) {
+      const lowerQuery = debouncedQuery.toLowerCase().trim();
+      result = result.filter(
+        (item) =>
+          item.name.toLowerCase().includes(lowerQuery) ||
+          item.nickname.toLowerCase().includes(lowerQuery),
+      );
+    }
+
+    // Filter team — cuma jalan kalau bukan "ALL"
+    if (activeTeam !== "ALL") {
+      result = result.filter((item) => item.type === activeTeam);
+    }
+
+    return [...result].sort(
+      (a, b) => getTypeOrder(a.type) - getTypeOrder(b.type),
     );
-  }, [members, debouncedQuery]);
+  }, [members, debouncedQuery, activeTeam]);
 
   if (filteredMembers.length === 0) {
     return (
       <div className="text-center py-16 text-white/50">
         <p className="text-lg">Member tidak ditemukan</p>
-        <p className="text-sm mt-1">Coba kata kunci lain</p>
+        <p className="text-sm mt-1">Coba kata kunci atau filter lain</p>
       </div>
     );
   }
@@ -64,6 +90,8 @@ export default function MemberGrid({
     <div className="grid grid-cols-2 gap-4 md:grid-cols-5 mt-5">
       {filteredMembers.map((item) => {
         const price = prices[item.code] ?? defaultPrice;
+        const activePrice = price[activeCategory];
+
         return (
           <div
             className="rounded-3xl bg-[var(--primary)] shadow-2xl hover:scale-[1.04] transition-all ease-in-out overflow-hidden"
@@ -79,32 +107,22 @@ export default function MemberGrid({
               />
             </div>
             <div className="p-3 md:p-5 flex justify-center items-center flex-col">
-              <p
-                className={`text-sm md:text-md font-semibold text-center leading-tight`}
-              >
+              <p className={`${item?.name.length > 16 ? 'text-[12px]' : 'text-sm'}  md:text-md font-semibold text-center leading-tight`}>
                 {item?.name}
               </p>
-              <p className="text-center text-[12px] md:text-md">{item?.nickname}</p>
+              <p className="text-center text-[12px] md:text-md">
+                {item?.nickname}
+              </p>
 
-              <div className="w-full space-y-2 text-sm mt-2">
+              <div className="w-full mt-2">
                 <div className="flex flex-col md:flex-row md:justify-between items-center bg-black/20 rounded-lg px-3 py-2">
-                  <span className="font-medium">VC</span>
-                  <span className="font-semibold">
-                    Rp {price.vc.toLocaleString("id-ID")}
+                  <span className="font-medium text-xs md:text-sm">
+                    {categoryLabels[activeCategory]}
+                  </span>
+                  <span className="font-semibold text-red-400">
+                    Rp {activePrice.toLocaleString("id-ID")}
                   </span>
                 </div>
-                {/* <div className="flex flex-col md:flex-row md:justify-between items-center bg-black/20 rounded-lg px-3 py-2">
-                  <span className="font-medium">Two Shot</span>
-                  <span className="font-semibold">
-                    Rp {price.twoShot.toLocaleString("id-ID")}
-                  </span>
-                </div>
-                <div className="flex flex-col md:flex-row md:justify-between items-center bg-black/20 rounded-lg px-3 py-2">
-                  <span className="font-medium">MNG</span>
-                  <span className="font-semibold">
-                    Rp {price.mng.toLocaleString("id-ID")}
-                  </span>
-                </div> */}
               </div>
             </div>
           </div>
