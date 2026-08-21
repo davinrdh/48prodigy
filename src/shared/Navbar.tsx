@@ -76,33 +76,14 @@ export default function Navbar() {
             <Link href="/" locale={currentLocale} className="brand">
                 <Image
                   src="/logo-transparant2.png"
-                  alt="IndoexpatsInsurance"
+                  alt="48Prodigy"
                   width={85}
                   height={80}
                 />
               </Link>
             <div className="flex gap-5">
-              
-              {pathname === `/${currentLocale}/landing` ? (
-                <Link
-                  href="/"
-                  locale={currentLocale}
-                  className="flex items-center text-brand"
-                >
-                  <div>
-                    <h6 className="m-0 font-semibold">IndoexpatsInsurance</h6>
-                    <p
-                      style={{
-                        fontSize: "10px",
-                        color: "var(--primary)",
-                      }}
-                    >
-                      by msiglifeindonesia
-                    </p>
-                  </div>
-                </Link>
-              ) : (
-                <div className="flex items-center">
+
+               <div className="flex items-center">
                   <div>
                     {navLink.map((link, index) => (
                       <Link
@@ -129,7 +110,6 @@ export default function Navbar() {
                     {/* <button type="button" className="hidden md:inline-block " onClick={() => setModalForm(true)}>Register</button> */}
                   </div>
                 </div>
-              )}
             </div>
             {pathname !== `/${currentLocale}/landing` && (
               <div

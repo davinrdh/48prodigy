@@ -39,14 +39,14 @@ export default function Sidebar({
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex justify-between p-3 mb-3 border-b border-[var(--background)]">
+        <div className="flex justify-between px-3 pt-3 border-b border-[var(--background)]">
           <div className="flex">
-            <Link href="" className="brand" onClick={() => setIsOpen(false)}>
+            <Link href="" className="brand-sidebar" onClick={() => setIsOpen(false)}>
               <Image
                 src="/logo-transparant2.png"
-                alt="IndoexpatsInsurance"
+                alt="48Prodigy"
                 width={50}
-                height={45}
+                height={50}
               />
             </Link>
             <Link

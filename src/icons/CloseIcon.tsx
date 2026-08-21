@@ -11,14 +11,14 @@ export default function CloseIcon() {
     >
       <path
         d="M1 1L15.2418 15.0418"
-        stroke="#51526C"
+        stroke="currentColor"
         strokeWidth="1.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M15.2417 1L0.999904 15.0418"
-        stroke="#51526C"
+        stroke="currentColor"
         strokeWidth="1.2"
         strokeLinecap="round"
         strokeLinejoin="round"
