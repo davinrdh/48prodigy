@@ -1,20 +1,20 @@
-"use client";
+// "use client";
 // import Link from 'next/link'
 import React from "react";
 import CardProduct from "@/components/CardProduct";
 // import { ProductSmile } from "../../product";
-import { OrderId, ProductSmileCardEn } from "@/app/productTranslate";
+import { OrderEn, OrderId } from "@/app/productTranslate";
 import { useLocale } from "next-intl";
 
 export default function Product() {
   const locale = useLocale()
-  const ProductCard = locale == 'en' ? ProductSmileCardEn : OrderId
+  const ProductCard = locale == 'en' ? OrderEn : OrderId
 
   return (
     <div>
       <div className="text-center">
         <div className="mt-14">
-          <h1 className="text-3xl md:text-5xl font-semibold mb-5">{locale == 'en' ? "Products" : "PILIH LAYANAN JOKI"}</h1>
+          <h1 className="text-3xl md:text-5xl font-semibold mb-5">{locale == 'en' ? "CHOOSE A SERVICE" : "PILIH LAYANAN JOKI"}</h1>
         </div>
       </div>
       <div className="px-5 md:px-20 mt-20">

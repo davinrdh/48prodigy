@@ -6,11 +6,10 @@ import AgentContact from './AgentContact'
 export default function page() {
   const t = useTranslations("Contact")
   return (
-    <div className=''>
-      <div className='text-center py-[5rem] backgorund2'>
-        <div className='mt-16 md:mt-36'>
-          <h1 className='text-5xl md:text-7xl font-semibold mb-7'>{t("hero1")}</h1>
-          <p className='px-5 md:px-[15rem]'>{t("heroDesc1")}</p>
+    <div>
+      <div className='text-center'>
+        <div className='mt-14'>
+          <h1 className='text-3xl md:text-5xl font-semibold mb-5'>{t("hero1")}</h1>
         </div>
       </div>
 
