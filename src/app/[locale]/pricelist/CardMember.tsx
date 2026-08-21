@@ -27,27 +27,50 @@ const defaultPrice: MemberPrice = { vc: 150000, twoShot: 300000, mng: 100000 };
 
 async function getMembers(): Promise<JKT48Member[]> {
   try {
+    console.log("🔍 [FETCH START] Mencoba fetch ke jkt48.com...");
+
     const res = await fetch("https://jkt48.com/api/v1/members?lang=id", {
       next: { revalidate: 3600 },
       headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
       },
-      signal: AbortSignal.timeout(5000), // jangan tunggu lebih dari 5 detik
+      signal: AbortSignal.timeout(5000),
     });
 
-    if (!res.ok) throw new Error(`API gagal: ${res.status}`);
+    console.log("📡 [STATUS]", res.status, res.statusText);
 
-    const json = await res.json();
-    if (!json.data || json.data.length === 0) throw new Error("Data kosong dari API");
+    const rawText = await res.text();
+    console.log("📄 [RAW RESPONSE - 300 char pertama]", rawText.slice(0, 300));
+
+    if (!res.ok) {
+      throw new Error(`API gagal: ${res.status}`);
+    }
+
+    const json = JSON.parse(rawText);
+    console.log(
+      "✅ [PARSED] Jumlah data:",
+      json.data?.length ?? "field 'data' tidak ada",
+    );
+
+    if (!json.data || json.data.length === 0) {
+      throw new Error("Data kosong dari API");
+    }
 
     return json.data;
   } catch (error) {
-    console.error("Fetch live gagal, pakai cache statis sebagai fallback:", error);
+    console.error("❌ [FETCH GAGAL]", error);
     return [];
   }
 }
 
 export default async function CardMember() {
   const members = await getMembers();
-  return <MemberGrid members={members} prices={memberPrices} defaultPrice={defaultPrice} />;
+  return (
+    <MemberGrid
+      members={members}
+      prices={memberPrices}
+      defaultPrice={defaultPrice}
+    />
+  );
 }
