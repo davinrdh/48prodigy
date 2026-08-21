@@ -9,8 +9,6 @@ import { useLocale, useTranslations } from "next-intl";
 import {
   BookingEn,
   BookingId,
-  ProductSmileCardEn,
-  ProductSmileCardId,
 } from "../productTranslate";
 import Button from "@/components/Button";
 

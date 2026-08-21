@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import Image from "next/image";
-import { OrderId, ProductSmileCardEn, ProductSmileCardId } from "@/app/productTranslate";
+import { OrderEn, OrderId } from "@/app/productTranslate";
 import { getLocale } from "next-intl/server";
 import ArrowIcon from "@/icons/ArrowIcon";
 
@@ -9,7 +9,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
     const { id } = await params;
     const locale = await getLocale()
 
-    const ProductCard = locale == 'en' ? ProductSmileCardEn : OrderId
+    const ProductCard = locale == 'en' ? OrderEn : OrderId
 
     const product = ProductCard.find((p) => p.id === id);
 
