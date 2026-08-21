@@ -17,7 +17,7 @@ export default function TeamFilter() {
   const { activeTeam, setActiveTeam } = useSearch();
 
   return (
-    <div className="flex md:gap-2 pb-1 md:pb-0 md:flex-wrap scrollbar-hide -ms-[.25rem] md:mx-0 md:px-0">
+    <div className="flex gap-1 pb-1 md:pb-0 md:flex-wrap scrollbar-hide md:mx-0 md:px-0">
       {teams.map((team) => {
         const isActive = activeTeam === team;
         return (
