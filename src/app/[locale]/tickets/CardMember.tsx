@@ -1,6 +1,6 @@
 // CardMember.tsx
 import MemberGrid from "./MemberGrid";
-import membersData from "../../../../data/members-cache.json";
+import membersData from "@/data/members-cache.json";
 
 interface JKT48Member {
   type: string;
