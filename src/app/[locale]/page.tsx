@@ -1,7 +1,4 @@
-import FormHome from "@/components/Form/FormHome";
-import CardProduct from "@/components/CardProduct";
 import ReviewSwiper from "@/components/Swiper/ReviewSwiper";
-import ArrowIcon from "@/icons/ArrowIcon";
 import ChecklistIcon from "@/icons/ChecklistIcon";
 import Image from "next/image";
 import React from "react";

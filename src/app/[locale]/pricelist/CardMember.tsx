@@ -43,7 +43,7 @@ async function getMembers(): Promise<JKT48Member[]> {
     return json.data;
   } catch (error) {
     console.error("Fetch live gagal, pakai cache statis sebagai fallback:", error);
-    return membersCache.data ?? [];
+    return [];
   }
 }
 
