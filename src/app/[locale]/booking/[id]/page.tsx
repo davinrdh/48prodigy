@@ -7,6 +7,7 @@ import membersData from "@/data/members-cache.json";
 import BookingFormExclusive from "@/components/BookingFornExclusive";
 import BookingFormJokiKonser from "@/components/BookingFormConcert";
 import BookingFormConcert from "@/components/BookingFormConcertJKT48";
+import BookingFormExclusiveCart from "@/components/BookingFormExclusiveCart";
 
 // Mapping id produk (sesuai productTranslate.ts) ke jenis form yang ditampilkan
 const exclusiveIds: Record<string, "vc" | "twoShot" | "mng"> = {
@@ -15,7 +16,11 @@ const exclusiveIds: Record<string, "vc" | "twoShot" | "mng"> = {
   "meet-and-greet": "mng",
 };
 
-export default async function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
+export default async function ProductDetail({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   const locale = await getLocale();
 
@@ -43,8 +48,14 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
         <p className="mb-5">{product.desc}</p>
 
         <div className="">
-          {exclusiveType && (
+          {/* {exclusiveType && (
             <BookingFormExclusive type={exclusiveType} members={membersData.data ?? []} />
+          )} */}
+          {exclusiveType && (
+            <BookingFormExclusiveCart
+              type={exclusiveType}
+              members={membersData.data ?? []}
+            />
           )}
           {isConcert && <BookingFormConcert />}
           {isJokiKonser && <BookingFormJokiKonser />}

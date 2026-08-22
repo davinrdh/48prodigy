@@ -37,3 +37,23 @@ export interface GeneralConcertForm {
   noHp: string;
   noKtp: string;
 }
+
+export interface CartItem {
+  id: string; // untuk key React & keperluan hapus item
+  member: JKT48Member;
+  tanggal: string;
+  sesi: string;
+  jumlahTiket: number;
+}
+
+export const maxSameMemberByType: Record<ExclusiveType, number> = {
+  vc: 5,
+  mng: 2,
+  twoShot: 1,
+};
+
+export const maxTiketByType: Record<ExclusiveType, number> = {
+  vc: 5,
+  mng: 20,
+  twoShot: 1,
+};
