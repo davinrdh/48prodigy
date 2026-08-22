@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useSearch } from "@/context/SearchContext";
+import { getExclusivePrice } from "@/data/exclusivePrices";
 
 interface JKT48Member {
   type: string;
@@ -13,16 +14,8 @@ interface JKT48Member {
   jkt48_member_id: number;
 }
 
-interface MemberPrice {
-  vc: number;
-  twoShot: number;
-  mng: number;
-}
-
 interface MemberGridProps {
   members: JKT48Member[];
-  prices: Record<string, MemberPrice>;
-  defaultPrice: MemberPrice;
 }
 
 const typeOrder: Record<string, number> = {
@@ -36,17 +29,7 @@ function getTypeOrder(type: string): number {
   return typeOrder[type] ?? 99;
 }
 
-// const categoryLabels: Record<string, string> = {
-//   vc: "VC",
-//   twoShot: "Two Shot",
-//   mng: "MNG",
-// };
-
-export default function MemberGrid({
-  members,
-  prices,
-  defaultPrice,
-}: MemberGridProps) {
+export default function MemberGrid({ members }: MemberGridProps) {
   const { query, activeCategory, activeTeam } = useSearch();
   const [debouncedQuery, setDebouncedQuery] = useState(query);
 
@@ -67,7 +50,6 @@ export default function MemberGrid({
       );
     }
 
-    // Filter team — cuma jalan kalau bukan "ALL"
     if (activeTeam !== "ALL") {
       result = result.filter((item) => item.type === activeTeam);
     }
@@ -87,9 +69,10 @@ export default function MemberGrid({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-6 mt-5">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-5 mt-5">
       {filteredMembers.map((item) => {
-        const price = prices[item.code] ?? defaultPrice;
+        // Panggil di sini — 1 baris, langsung dapat objek { vc, twoShot, mng }
+        const price = getExclusivePrice(item.code);
         const activePrice = price[activeCategory];
 
         return (
@@ -107,9 +90,7 @@ export default function MemberGrid({
               />
             </div>
             <div className="p-3 md:p-5 flex justify-center items-center flex-col">
-              <p
-                className={`${item?.name.length > 14 ? "truncate" : ""} w-full max-w-[200px] md:text-md font-semibold text-center leading-tight`}
-              >
+              <p className="text-sm md:text-md font-semibold text-center leading-tight">
                 {item?.name}
               </p>
               <p className="text-center text-[12px] md:text-md">
@@ -117,13 +98,13 @@ export default function MemberGrid({
               </p>
 
               <div className="w-full mt-2">
-                <div className=" bg-[--background] rounded-lg px-3 py-2 text-center">
+                <div className="text-center bg-black/20 rounded-lg px-3 py-2">
                   {/* <span className="font-medium text-xs md:text-sm">
                     {categoryLabels[activeCategory]}
                   </span> */}
-                  <p className="font-semibold text-red-400">
+                  <span className="font-semibold text-red-400">
                     Rp {activePrice.toLocaleString("id-ID")}
-                  </p>
+                  </span>
                 </div>
               </div>
             </div>
