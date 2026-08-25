@@ -35,6 +35,7 @@ export default function ScheduleModal({ onClose }: Props) {
           <Image src="/jadwal4.jpg" alt="Jadwal" width={600} height={500} className="rounded-xl w-full h-auto" />
           <Image src="/jadwal.jpg" alt="Jadwal" width={600} height={500} className="rounded-xl w-full h-auto" />
         </div>
+        <div className="shrink-0 flex justify-between items-center px-4 pt-4 pb-3 border-t border-white/10" />
       </div>
     </div>
   );

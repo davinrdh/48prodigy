@@ -8,6 +8,7 @@ import ScheduleModal from "./ScheduleModal";
 import type { JKT48Member, ExclusiveType, CartItem } from "@/types/booking";
 import { maxSameMemberByType } from "@/types/booking";
 import { getExclusivePrice } from "@/data/exclusivePrices";
+import SubmitStatusModal from "./SubmitStatusModal";
 
 interface Props {
   type: ExclusiveType;
@@ -32,9 +33,19 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
   const [password, setPassword] = useState("");
   const [noWa, setNoWa] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const anyModalOpen = showAddModal || showScheduleModal;
   const maxSameMember = maxSameMemberByType[type];
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
+    null,
+  );
+  const [submitErrorMessage, setSubmitErrorMessage] = useState("");
+
+  const anyModalOpen =
+    showAddModal || showScheduleModal || submitStatus !== null;
+
+  const GOOGLE_APPS_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbyb8jE_TXO5e-FiggpG0_XJYzsiBgK6b5zRpNdy-CY-FB5McRjLJfMl_8HxWKVmxKQ-/exec";
 
   useEffect(() => {
     document.body.style.overflow = anyModalOpen ? "hidden" : "auto";
@@ -66,20 +77,73 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
     return sum + price[type]; // tidak dikali jumlahTiket lagi
   }, 0);
 
+  function formatWaLink(noWa: string) {
+    let normalized = noWa.trim().replace(/[\s-]/g, ""); // hapus spasi & strip
+
+    if (normalized.startsWith("+62")) {
+      normalized = normalized.slice(1); // hapus '+' saja, sisanya (62...) sudah benar
+    } else if (normalized.startsWith("62")) {
+      // sudah benar, tidak perlu diubah
+    } else if (normalized.startsWith("0")) {
+      normalized = "62" + normalized.slice(1); // ganti '0' di depan jadi '62'
+    }
+
+    return `https://wa.me/${normalized}`;
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (cart.length === 0) {
-      alert("Tambahkan minimal 1 member dulu ya");
+      setSubmitErrorMessage("Tambahkan minimal 1 member dulu ya");
+      setSubmitStatus("error");
       return;
     }
 
     setSubmitting(true);
     try {
-      const payload = { type, cart, email, password, noWa, totalHarga };
-      // TODO: ganti dengan endpoint API kamu
-      console.log("Submit:", payload);
-      alert("Pesanan berhasil dikirim! Tim kami akan segera menghubungi kamu.");
+      const memberSummary = cart
+        .map(
+          (item) =>
+            `${item.member.name} | ${item.sesi} | ${item.tanggal} | ${item.jumlahTiket} tiket`,
+        )
+        .join("\n");
+
+      const payload = {
+        type,
+        memberSummary,
+        email,
+        password,
+        waLink: formatWaLink(noWa),
+        totalHarga,
+      };
+
+      const res = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        setSubmitStatus("success");
+        setCart([]);
+        setEmail("");
+        setPassword("");
+        setNoWa("");
+      } else {
+        setSubmitErrorMessage(
+          result.message || "Terjadi kesalahan dari server.",
+        );
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Gagal submit ke Google Apps Script:", error);
+      setSubmitErrorMessage(
+        "Gagal terhubung ke server. Periksa koneksi internet kamu dan coba lagi.",
+      );
+      setSubmitStatus("error");
     } finally {
       setSubmitting(false);
     }
@@ -203,13 +267,22 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
               <label className="block text-sm font-medium text-white/80 mb-1.5">
                 Password Akun JKT48
               </label>
-              <input
-                type="input"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-black/30 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-red-500"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-black/30 rounded-xl px-3 py-2.5 pr-12 text-sm outline-none focus:ring-2 focus:ring-red-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-xs font-medium"
+                >
+                  {showPassword ? "Sembunyikan" : "Lihat"}
+                </button>
+              </div>
               <p className="text-xs text-white/40 mt-1">
                 Data kamu aman & hanya dipakai untuk proses war tiket.
               </p>
@@ -277,6 +350,14 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
 
       {showScheduleModal && (
         <ScheduleModal onClose={() => setShowScheduleModal(false)} />
+      )}
+
+      {submitStatus && (
+        <SubmitStatusModal
+          status={submitStatus}
+          message={submitErrorMessage}
+          onClose={() => setSubmitStatus(null)}
+        />
       )}
     </>
   );
