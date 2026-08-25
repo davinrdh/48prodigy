@@ -1,10 +1,10 @@
 import React from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { OrderEn, OrderId } from "@/app/productTranslate";
 import { getLocale } from "next-intl/server";
 import ArrowIcon from "@/icons/ArrowIcon";
 import membersData from "@/data/members-cache.json";
-import BookingFormExclusive from "@/components/BookingFornExclusive";
+// import BookingFormExclusive from "@/components/BookingFornExclusive";
 import BookingFormJokiKonser from "@/components/BookingFormConcert";
 import BookingFormConcert from "@/components/BookingFormConcertJKT48";
 import BookingFormExclusiveCart from "@/components/BookingFormExclusiveCart";

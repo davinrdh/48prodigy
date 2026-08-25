@@ -13,8 +13,15 @@ interface Props {
   onAdd: (item: CartItem) => void;
 }
 
-export default function AddMemberModal({ type, members, onClose, onAdd }: Props) {
-  const [selectedMember, setSelectedMember] = useState<JKT48Member | null>(null);
+export default function AddMemberModal({
+  type,
+  members,
+  onClose,
+  onAdd,
+}: Props) {
+  const [selectedMember, setSelectedMember] = useState<JKT48Member | null>(
+    null,
+  );
   const [tanggal, setTanggal] = useState("");
   const [sesi, setSesi] = useState("");
   const [jumlahTiket, setJumlahTiket] = useState(1);
@@ -36,14 +43,21 @@ export default function AddMemberModal({ type, members, onClose, onAdd }: Props)
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-5" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-5"
+      onClick={onClose}
+    >
       <div
         className="bg-[var(--primary)] rounded-3xl max-w-md w-full max-h-[85vh] overflow-hidden flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="shrink-0 flex justify-between items-center px-5 pt-5 pb-3 border-b border-white/10">
           <h3 className="font-semibold text-lg">Tambah Member</h3>
-          <button type="button" onClick={onClose} className="text-white/60 hover:text-white text-xl leading-none">
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-white/60 hover:text-white text-xl leading-none"
+          >
             ✕
           </button>
         </div>
@@ -62,17 +76,21 @@ export default function AddMemberModal({ type, members, onClose, onAdd }: Props)
           )}
 
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-1.5">Tanggal</label>
+            <label className="block text-sm font-medium text-white/80 mb-1.5">
+              Tanggal
+            </label>
             <input
               type="date"
               value={tanggal}
               onChange={(e) => setTanggal(e.target.value)}
-              className="w-full bg-black/30 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full bg-black/30 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-red-500 min-w-0 [&::-webkit-calendar-picker-indicator]:ml-1"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-1.5">Sesi</label>
+            <label className="block text-sm font-medium text-white/80 mb-1.5">
+              Sesi
+            </label>
             <input
               type="text"
               value={sesi}
@@ -84,7 +102,10 @@ export default function AddMemberModal({ type, members, onClose, onAdd }: Props)
 
           <div>
             <label className="block text-sm font-medium text-white/80 mb-1.5">
-              Jumlah Tiket {maxTiket > 1 && <span className="text-white/40">(maks {maxTiket})</span>}
+              Jumlah Tiket{" "}
+              {maxTiket > 1 && (
+                <span className="text-white/40">(maks {maxTiket})</span>
+              )}
             </label>
             <input
               type="number"
@@ -92,7 +113,9 @@ export default function AddMemberModal({ type, members, onClose, onAdd }: Props)
               max={maxTiket}
               value={jumlahTiket}
               disabled={maxTiket === 1}
-              onChange={(e) => setJumlahTiket(Math.min(Number(e.target.value), maxTiket))}
+              onChange={(e) =>
+                setJumlahTiket(Math.min(Number(e.target.value), maxTiket))
+              }
               className="w-full bg-black/30 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
             />
           </div>
