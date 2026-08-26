@@ -1,44 +1,43 @@
-// "use client";
-// import Link from 'next/link'
-import React from "react";
 import CardProduct from "@/components/CardProduct";
-// import { ProductSmile } from "../../product";
 import { OrderEn, OrderId } from "@/app/productTranslate";
-import { useLocale } from "next-intl";
+import { getLocale } from "next-intl/server";
+import { getBookingStatus } from "@/lib/getBookingStatus";
 
-export default function Product() {
-  const locale = useLocale()
-  const ProductCard = locale == 'en' ? OrderEn : OrderId
+export default async function Product() {
+  const locale = await getLocale();
+  const ProductCard = locale === "en" ? OrderEn : OrderId;
+
+  const productsWithStatus = await Promise.all(
+    ProductCard.map(async (item) => ({
+      ...item,
+      isOpen: await getBookingStatus(item.id),
+    }))
+  );
 
   return (
     <div>
       <div className="text-center">
         <div className="mt-14">
-          <h1 className="text-3xl md:text-5xl font-semibold mb-5">{locale == 'en' ? "CHOOSE A SERVICE" : "PILIH LAYANAN JOKI"}</h1>
+          <h1 className="text-3xl md:text-5xl font-semibold mb-5">
+            {locale === "en" ? "CHOOSE A SERVICE" : "PILIH LAYANAN JOKI"}
+          </h1>
         </div>
       </div>
       <div className="px-5 md:px-20 mt-20">
         <div className="flex justify-center flex-wrap gap-7">
-          {ProductCard.map((item, i) => (
+          {productsWithStatus.map((item, i) => (
             <div key={i} className="max-w-sm">
               <CardProduct
                 descProduct={item.desc}
                 img={item.img}
                 linkProduct={item.id}
                 nameProduct={item.title}
+                isOpen={item.isOpen}
               />
             </div>
           ))}
         </div>
       </div>
-
-      <ul>
-        {/* {ProductSmile.map((item) => (
-                    <li key={item.id}>
-                        <Link href={`/product/${item?.id}`}>{item?.title}</Link>
-                    </li>
-                ))} */}
-      </ul>
     </div>
   );
 }

@@ -30,7 +30,7 @@ export default function Sidebar({
                                     <Link href="/" className="brand" onClick={() => setIsOpen(false)}>
                                         <Image
                                             src="/logo.svg"
-                                            alt="IndoexpatsInsurance"
+                                            alt="48Prodigy"
                                             width={50}
                                             height={45}
                                         />
@@ -42,7 +42,7 @@ export default function Sidebar({
                                     >
                                         <div>
                                             <p className="m-0 font-semibold text-sm">
-                                                IndoexpatsInsurance
+                                                48Prodigy
                                             </p>
                                             <p
                                                 style={{

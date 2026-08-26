@@ -10,6 +10,7 @@ interface ICardProduct {
   nameProduct: any;
   descProduct: any;
   linkProduct: any;
+  isOpen: boolean;
 }
 
 export default function CardProduct({
@@ -17,6 +18,7 @@ export default function CardProduct({
   nameProduct,
   descProduct,
   linkProduct,
+  isOpen,
 }: ICardProduct) {
   const params = useParams();
   const locale = params?.locale;
@@ -51,12 +53,18 @@ export default function CardProduct({
               : descProduct}
           </p>
 
-          <Link
-            href={`/${locale}/booking/${linkProduct}`}
-            className="btn-primary"
-          >
-            {locale == "en" ? "Booking Now" : "Pesan Sekarang"}
-          </Link>
+          {isOpen ? (
+            <Link
+              href={`/${locale}/booking/${linkProduct}`}
+              className="btn-primary"
+            >
+              {locale == "en" ? "Booking Now" : "Pesan Sekarang"}
+            </Link>
+          ) : (
+            <button disabled className="btn-muted">
+              {locale == "en" ? "Cooming Soon" : "Segera hadir"}
+            </button>
+          )}
         </div>
       </div>
     </div>
