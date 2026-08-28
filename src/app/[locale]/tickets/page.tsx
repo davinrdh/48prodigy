@@ -1,10 +1,17 @@
+import { useLocale } from "next-intl";
+
 export default function Page() {
+  const locale = useLocale();
   return (
     <div>
       <div className="p-10 text-center h-screen flex flex-col justify-center items-center">
-        <p className="text-2xl font-bold mb-2">🚧 Dalam Perbaikan</p>
+        <p className="text-2xl font-bold mb-2">
+          🚧 {locale === "en" ? "Under Maintenance" : "Dalam Perbaikan"}
+        </p>
         <p className="text-white/60 text-sm">
-          Laman ini masih dalam perbaikan. Silakan kembali lagi nanti.
+          {locale === "en"
+            ? "This page is still under maintenance. Please check back later."
+            : "Laman ini masih dalam perbaikan. Silakan kembali lagi nanti."}
         </p>
       </div>
     </div>

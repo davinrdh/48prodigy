@@ -13,6 +13,7 @@ import SubmitStatusModal from "./SubmitStatusModal";
 interface Props {
   type: ExclusiveType;
   members: JKT48Member[];
+  locale: string;
 }
 
 const typeLabels: Record<ExclusiveType, string> = {
@@ -25,7 +26,11 @@ function formatRupiah(n: number) {
   return `Rp ${n.toLocaleString("id-ID")}`;
 }
 
-export default function BookingFormExclusiveCart({ type, members }: Props) {
+export default function BookingFormExclusiveCart({
+  type,
+  members,
+  locale,
+}: Props) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showScheduleModal, setShowScheduleModal] = useState(false);
@@ -156,9 +161,13 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
         <div className="rounded-3xl bg-[var(--primary)] shadow-2xl w-full lg:w-1/2 lg:h-[750px] lg:max-h-[750px] overflow-hidden flex flex-col">
           <div className="shrink-0 flex justify-between items-start px-6 md:px-8 pt-6 md:pt-8 pb-5 border-b border-white/10">
             <div>
-              <h2 className="text-xl font-bold">Pesan {typeLabels[type]}</h2>
+              <h2 className="text-xl font-bold">
+                {locale === "en" ? "Booking" : "Pesan"} {typeLabels[type]}
+              </h2>
               <p className="text-sm text-white/60 mt-1">
-                Tambahkan member yang ingin dipesan
+                {locale === "en"
+                  ? "Add the members you want to book"
+                  : "Tambahkan member yang ingin dipesan"}
               </p>
             </div>
             <button
@@ -166,7 +175,7 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
               onClick={() => setShowScheduleModal(true)}
               className="shrink-0 bg-black/30 hover:bg-black/40 text-white text-xs font-medium px-3 py-2 rounded-lg transition-colors whitespace-nowrap"
             >
-              📅 Jadwal
+              📅 Time Table
             </button>
           </div>
 
@@ -174,7 +183,9 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
           <div className="max-h-[230px] md:max-h-none md:flex-1 md:min-h-0 overflow-y-auto custom-scrollbar p-6 md:p-8 space-y-3">
             {cart.length === 0 && (
               <div className="text-center py-10 text-white/40 text-sm">
-                Belum ada member yang ditambahkan
+                {locale === "en"
+                  ? "No members have been added yet"
+                  : "Belum ada member yang ditambahkan"}
               </div>
             )}
 
@@ -231,7 +242,7 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
               disabled={availableMembers.length === 0}
               className="w-full border-2 border-dashed border-white/20 hover:border-white/40 disabled:opacity-40 disabled:cursor-not-allowed text-white/70 hover:text-white rounded-xl py-2.5 text-sm font-medium transition-colors"
             >
-              + Tambah Member
+              {locale === "en" ? "+ Add Member" : "+ Tambah Member"}
             </button>
           </div>
         </div>
@@ -243,16 +254,20 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
           className="rounded-3xl bg-[var(--primary)] shadow-2xl w-full lg:w-1/2 lg:h-[750px] lg:max-h-[750px] overflow-hidden flex flex-col"
         >
           <div className="shrink-0 px-6 lg:px-8 pt-6 lg:pt-8 pb-5 border-b border-white/10">
-            <h2 className="text-xl font-bold">Data Pemesanan</h2>
+            <h2 className="text-xl font-bold">
+              {locale === "en" ? "Order Details" : "Data Pemesanan"}
+            </h2>
             <p className="text-sm text-white/60 mt-1">
-              Lengkapi data akun untuk proses war
+              {locale === "en"
+                ? "Complete the account data for the war process"
+                : "Lengkapi data akun untuk proses war"}
             </p>
           </div>
 
           <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar p-6 md:p-8 space-y-5">
             <div>
               <label className="block text-sm font-medium text-white/80 mb-1.5">
-                Email Akun JKT48
+                {locale === "en" ? "JKT48 Account Email" : "Email Akun JKT48"}
               </label>
               <input
                 type="email"
@@ -265,7 +280,9 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
 
             <div>
               <label className="block text-sm font-medium text-white/80 mb-1.5">
-                Password Akun JKT48
+                {locale === "en"
+                  ? "JKT48 Account Password"
+                  : "Password Akun JKT48"}
               </label>
               <div className="relative">
                 <input
@@ -280,17 +297,39 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
                   onClick={() => setShowPassword((prev) => !prev)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-xs font-medium"
                 >
-                  {showPassword ? "Sembunyikan" : "Lihat"}
+                  {showPassword ? (
+                    /* SVG Font Awesome: Eye Slash (Sembunyikan) */
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 640 512"
+                    >
+                      <path d="M38.8 5.1C28.4-3.5 13.3-1.2 5.1 9.2s-3.3 24.3 7.1 32.5l452 352c10.4 8.1 25.5 5.9 33.7-4.5s5.9-25.5-4.5-33.7L38.8 5.1zM439.3 352.2L358.5 288.5C368.5 272.2 374 252.8 374 232c0-61.9-50.1-112-112-112-20.8 0-40.2 5.5-56.5 15.5L125.7 67.8C161.4 46.1 204.4 32 250 32c141.4 0 262.4 81.7 322.9 200-24.9 49.3-59.5 91.2-101.6 122.2zM157.3 226.7l-71.1-55.4C44 201 17.1 240.5 0 288c60.5 118.3 181.5 200 322.9 200c40.3 0 78.4-7.9 113.1-22l-64.8-50.5c-23.7 13.2-51.1 20.5-80.2 20.5-91.9 0-166-74.1-166-166c0-17.6 2.7-34.6 7.6-50.7z" />
+                    </svg>
+                  ) : (
+                    /* SVG Font Awesome: Eye (Tampilkan) */
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 576 512"
+                    >
+                      <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.5 92.9-131.3c3.3-7.9 3.3-16.7 0-24.6C558.5 204 527.2 152 480.4 108.6C433.5 64.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.1-13.7 6.6s1.1 11.9 6.6 13.7c9.5 3.1 19.8 4.8 30.4 4.8c44.2 0 80-35.8 80-80c0-10.6-1.7-20.9-4.8-30.4c-1.8-5.5-8.2-8.4-13.7-6.6s-8.4 8.2-6.6 13.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
+                    </svg>
+                  )}
                 </button>
               </div>
               <p className="text-xs text-white/40 mt-1">
-                Data kamu aman & hanya dipakai untuk proses war tiket.
+                {locale === "en"
+                  ? "Your data is secure and used solely for the ticket purchasing process."
+                  : "Data kamu aman & hanya dipakai untuk proses war tiket."}
               </p>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-white/80 mb-1.5">
-                Nomor WhatsApp Aktif
+                {locale === "en"
+                  ? "Active WhatsApp Number"
+                  : "Nomor WhatsApp Aktif"}
               </label>
               <input
                 type="tel"
@@ -304,11 +343,11 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
 
             <div className="border-t border-white/10 pt-5">
               <p className="text-sm font-medium text-white/80 mb-3">
-                Ringkasan Pesanan
+                {locale === "en" ? "Order Summary" : "Ringkasan Pesanan"}
               </p>
               <div className="bg-black/20 rounded-xl p-4 space-y-1.5 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-white/60">Jumlah Member</span>
+                  <span className="text-white/60">Total Member</span>
                   <span className="font-semibold">{cart.length}</span>
                 </div>
                 <div className="flex justify-between">
@@ -316,7 +355,9 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
                   <span className="font-semibold">{totalTiket}</span>
                 </div>
                 <div className="flex justify-between pt-2 mt-2 border-t border-white/10">
-                  <span className="text-white/80 font-medium">Total Bayar</span>
+                  <span className="text-white/80 font-medium">
+                    {locale === "en" ? "Total Payment" : "Total Bayar"}
+                  </span>
                   <span className="font-bold text-red-400">
                     {formatRupiah(totalHarga)}
                   </span>
@@ -332,8 +373,12 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
               className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-semibold py-3 rounded-xl transition-colors"
             >
               {submitting
-                ? "Mengirim..."
-                : `Pesan Sekarang (${formatRupiah(totalHarga)})`}
+                ? locale === "en"
+                  ? "Sending..."
+                  : "Mengirim..."
+                : locale === "en"
+                  ? `Order Now (${formatRupiah(totalHarga)})`
+                  : `Pesan Sekarang (${formatRupiah(totalHarga)})`}
             </button>
           </div>
         </form>
@@ -345,6 +390,7 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
           members={availableMembers}
           onClose={() => setShowAddModal(false)}
           onAdd={handleAddToCart}
+          locale={locale}
         />
       )}
 
@@ -357,6 +403,7 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
           status={submitStatus}
           message={submitErrorMessage}
           onClose={() => setSubmitStatus(null)}
+          locale={locale}
         />
       )}
     </>

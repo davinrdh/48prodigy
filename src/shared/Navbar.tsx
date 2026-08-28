@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Hamburger from "@/icons/Hamburger";
 import Sidebar from "./Sidebar";
-import ButtonCall from "@/components/ButtonCall";
 import ButtonTranslate from "@/components/ButtonTranslate";
 
 export default function Navbar() {
@@ -35,7 +34,7 @@ export default function Navbar() {
     { href: "/booking", label: "Booking" },
     { href: "/pricelist", label: "Price List" },
     { href: "/tickets", label: "Ticket Info" },
-    { href: "/testimoni", label: "Reviews" },
+    { href: "/reviews", label: "Reviews" },
   ];
 
   const navLinkId = [
@@ -43,7 +42,7 @@ export default function Navbar() {
     { href: "/booking", label: "Pesan" },
     { href: "/pricelist", label: "Daftar Harga" },
     { href: "/tickets", label: "Informasi Tiket" },
-    { href: "/testimoni", label: "Ulasan" },
+    { href: "/reviews", label: "Ulasan" },
   ];
 
   const navLink = currentLocale == "en" ? navLinkEn : navLinkId;

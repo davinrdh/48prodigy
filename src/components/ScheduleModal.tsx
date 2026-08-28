@@ -18,7 +18,7 @@ export default function ScheduleModal({ onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="shrink-0 flex justify-between items-center px-4 pt-4 pb-3 border-b border-white/10">
-          <h3 className="font-semibold text-lg">Jadwal</h3>
+          <h3 className="font-semibold text-lg">Time Table</h3>
           <button
             type="button"
             onClick={onClose}
