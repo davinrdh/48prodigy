@@ -1,4 +1,3 @@
-// app/[locale]/testimoni/page.tsx
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
@@ -9,11 +8,18 @@ import { useLocale } from "next-intl";
 export default function TestimoniPage() {
   const locale = useLocale();
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(21); // default aman untuk render pertama (server-safe)
+  
+  const [perPage, setPerPage] = useState(10);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+    
     function updatePerPage() {
-      setPerPage(window.innerWidth < 768 ? 10 : window.innerWidth < 1024 ? 20 : 21); // < md (768px) = 10, md ke atas = 20
+      const width = window.innerWidth;
+      const newPerPage = width < 768 ? 10 : width < 1024 ? 20 : 21;
+      
+      setPerPage((prev) => (prev !== newPerPage ? newPerPage : prev));
     }
 
     updatePerPage();
@@ -21,8 +27,6 @@ export default function TestimoniPage() {
     return () => window.removeEventListener("resize", updatePerPage);
   }, []);
 
-  // Reset ke halaman 1 setiap kali perPage berubah (misal user resize window),
-  // supaya tidak nyangkut di halaman yang sudah tidak valid
   useEffect(() => {
     setCurrentPage(1);
   }, [perPage]);
@@ -59,6 +63,10 @@ export default function TestimoniPage() {
     pages.push(totalPages);
 
     return pages;
+  }
+
+  if (!isMounted) {
+    return null;
   }
 
   return (
