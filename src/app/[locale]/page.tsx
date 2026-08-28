@@ -3,11 +3,8 @@ import ChecklistIcon from "@/icons/ChecklistIcon";
 import Image from "next/image";
 import React from "react";
 import { useLocale, useTranslations } from "next-intl";
-import {
-  BookingEn,
-  BookingId,
-} from "../productTranslate";
-import Button from "@/components/Button";
+import { BookingEn, BookingId } from "../productTranslate";
+import Link from "next/link";
 
 const SPIN_DURATION = 2;
 const GAP_BETWEEN_BOX = 1;
@@ -51,7 +48,14 @@ export default function Page() {
               ))}
             </div>
             <div className="mt-5">
-              <Button />
+              <Link href={`/${locale}/booking`}>
+                <button
+                  type="button"
+                  className="bg-[var(--secondary)] p-5 rounded-2xl font-bold w-full md:w-fit"
+                >
+                  <div>{locale == "en" ? "BOOKING NOW" : "PESAN SEKARANG"}</div>
+                </button>
+              </Link>
             </div>
           </div>
           <div className="flex items-center justify-end">
@@ -91,7 +95,9 @@ export default function Page() {
                   />
                   <div className="relative bg-[var(--primary)] rounded-[calc(1.5rem-1px)] shadow-sm overflow-hidden p-6 h-[285px] flex flex-col justify-between w-full">
                     <div className="h-1/2">
-                      <h1 className="font-semibold text-2xl mb-3 leading-tight text-center">{i+1}</h1>
+                      <h1 className="font-semibold text-2xl mb-3 leading-tight text-center">
+                        {i + 1}
+                      </h1>
                       <h3 className="font-semibold text-2xl mb-3 text-center">
                         {item.title}
                       </h3>

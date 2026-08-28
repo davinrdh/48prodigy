@@ -51,8 +51,7 @@ export default async function ProductDetail({
             <div className="rounded-3xl bg-[var(--primary)] shadow-2xl p-10 text-center h-screen flex flex-col justify-center items-center">
               <p className="text-2xl font-bold mb-2">🚧 Coming Soon</p>
               <p className="text-white/60 text-sm">
-                Layanan ini belum dibuka untuk pemesanan. Silakan kembali lagi
-                nanti.
+                {locale === 'en' ? "This service is not yet open for bookings. Please check back later." : "Layanan ini belum dibuka untuk pemesanan. Silakan kembali lagi nanti."}
               </p>
             </div>
           ) : (
@@ -61,6 +60,7 @@ export default async function ProductDetail({
                 <BookingFormExclusiveCart
                   type={exclusiveType}
                   members={membersData.data ?? []}
+                  locale={locale}
                 />
               )}
               {isConcert && <BookingFormConcert />}

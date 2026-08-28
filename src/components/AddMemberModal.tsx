@@ -11,6 +11,7 @@ interface Props {
   members: JKT48Member[];
   onClose: () => void;
   onAdd: (item: CartItem) => void;
+  locale: string;
 }
 
 export default function AddMemberModal({
@@ -18,6 +19,7 @@ export default function AddMemberModal({
   members,
   onClose,
   onAdd,
+  locale
 }: Props) {
   const [selectedMember, setSelectedMember] = useState<JKT48Member | null>(
     null,
@@ -52,7 +54,7 @@ export default function AddMemberModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="shrink-0 flex justify-between items-center px-5 pt-5 pb-3 border-b border-white/10">
-          <h3 className="font-semibold text-lg">Tambah Member</h3>
+          <h3 className="font-semibold text-lg">{locale === "en" ? "Add Member" : "Tambah Member"}</h3>
           <button
             type="button"
             onClick={onClose}
@@ -65,19 +67,22 @@ export default function AddMemberModal({
         <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar px-5 pt-4 pb-2 space-y-4">
           {members.length === 0 ? (
             <p className="text-center text-sm text-white/50 py-6">
-              Batas maksimal member untuk layanan ini sudah tercapai
+              {locale === "en" 
+  ? "The maximum limit of members for this service has been reached" 
+  : "Batas maksimal member untuk layanan ini sudah tercapai"}
             </p>
           ) : (
             <MemberPicker
               members={members}
               selectedCode={selectedMember?.code ?? null}
               onSelect={setSelectedMember}
+              locale={locale}
             />
           )}
 
           <div>
             <label className="block text-sm font-medium text-white/80 mb-1.5">
-              Tanggal
+              {locale === "en" ? "Date" : "Tanggal"}
             </label>
             <input
               type="date"
@@ -95,16 +100,16 @@ export default function AddMemberModal({
               type="text"
               value={sesi}
               onChange={(e) => setSesi(e.target.value)}
-              placeholder="Contoh: Sesi 1, 14:00 WIB"
+              placeholder={locale === "en" ? "Example: Sesi 1, 14:00 WIB" : "Contoh: Sesi 1, 14:00 WIB"}
               className="w-full bg-black/30 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-white/80 mb-1.5">
-              Jumlah Tiket{" "}
+             {locale === "en" ? "Number of Tickets" : "Jumlah Tiket"}{" "}
               {maxTiket > 1 && (
-                <span className="text-white/40">(maks {maxTiket})</span>
+                <span className="text-white/40">(max {maxTiket})</span>
               )}
             </label>
             <input
@@ -128,7 +133,7 @@ export default function AddMemberModal({
             disabled={!isValid}
             className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-colors"
           >
-            Tambahkan
+            {locale === "en" ? "Add" : "Tambahkan"}
           </button>
         </div>
       </div>

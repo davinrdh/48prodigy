@@ -24,14 +24,14 @@ export const OrderId = [
     id: "concert-jkt48",
     img: "/smile4.jpg",
     detail_img: "/term-life.png",
-    title: "Concert JKT48",
+    title: "Konser JKT48",
     desc: "Jangan lewatkan kemeriahan konser besar JKT48! Dapatkan kategori kursi impian terbaikmu melalui layanan war profesional.",
   },
   {
     id: "general-concert",
     img: "/smile5.jpg",
     detail_img: "/kid-insurance.png",
-    title: "Joki Konser Umum",
+    title: "Konser Umum",
     desc: "Layanan joki general untuk berbagai konser atau event musik lainnya di luar JKT48. Siap bantu war tiket section pilihanmu!",
   },
 ];
@@ -69,7 +69,7 @@ export const OrderEn = [
     id: "general-concert",
     img: "/smile5.jpg",
     detail_img: "/kid-insurance.png",
-    title: "General Concert Jock",
+    title: "General Concert",
     desc: "General jock service for various concerts or other music events outside of JKT48. Ready to help you war tickets for your preferred section!",
   },
 ];

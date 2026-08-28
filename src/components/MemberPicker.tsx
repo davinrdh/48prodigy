@@ -9,9 +9,10 @@ interface MemberPickerProps {
   members: JKT48Member[];
   selectedCode: string | null;
   onSelect: (member: JKT48Member) => void;
+  locale: string;
 }
 
-export default function MemberPicker({ members, selectedCode, onSelect }: MemberPickerProps) {
+export default function MemberPicker({ members, selectedCode, onSelect, locale }: MemberPickerProps) {
   const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,7 +28,7 @@ export default function MemberPicker({ members, selectedCode, onSelect }: Member
 
   return (
     <div className="relative">
-      <label className="block text-sm font-medium text-white/80 mb-1.5">Pilih Member</label>
+      <label className="block text-sm font-medium text-white/80 mb-1.5">{locale === "en" ? "Select Member" : "Pilih Member"}</label>
 
       <button
         type="button"
@@ -50,7 +51,7 @@ export default function MemberPicker({ members, selectedCode, onSelect }: Member
             </div>
           </>
         ) : (
-          <span className="text-white/50 text-sm">-- Pilih member --</span>
+          <span className="text-white/50 text-sm">{locale === "en" ? "-- Select Member --" : "-- Pilih Member --"}</span>
         )}
         <span className="ml-auto text-white/50">▾</span>
       </button>

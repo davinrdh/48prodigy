@@ -3,17 +3,19 @@ import { SearchProvider } from "@/context/SearchContext";
 import TeamFilter from "@/components/TeamFilter";
 import CategoryTabs from "@/components/CategoryTab";
 import SearchBar from "@/components/SearchBar";
+import { useLocale } from "next-intl";
 
 export default function Page() {
+   const locale = useLocale();
   return (
     <SearchProvider>
       <div className="mx-5 md:mx-0 md:px-20 md:pt-10 space-y-4">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
           <h1 className="text-center md:text-start mt-5 md:mt-0 text-xl md:text-3xl font-semibold">
-            DAFTAR HARGA
+            {locale === "en" ? "PRICE LIST" : "DAFTAR HARGA"}
           </h1>
           <div className="w-full md:w-80">
-            <SearchBar />
+            <SearchBar locale={locale} />
           </div>
         </div>
         <div>
