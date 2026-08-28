@@ -13,7 +13,7 @@ export default function Footer() {
     { href: "/booking", label: "Booking" },
     { href: "/pricelist", label: "Price List" },
     { href: "/tickets", label: "Ticket Info" },
-    { href: "/testimoni", label: "Reviews" },
+    { href: "/reviews", label: "Reviews" },
   ];
 
   const navLinkId = [
@@ -21,7 +21,7 @@ export default function Footer() {
     { href: "/booking", label: "Pesan" },
     { href: "/pricelist", label: "Daftar Harga" },
     { href: "/tickets", label: "Informasi Tiket" },
-    { href: "/testimoni", label: "Ulasan" },
+    { href: "/reviews", label: "Ulasan" },
   ];
 
   const navLink = locale == "en" ? navLinkEn : navLinkId;
