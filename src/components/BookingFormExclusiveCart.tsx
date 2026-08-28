@@ -151,9 +151,9 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row gap-3 items-start">
+      <div className="flex flex-col lg:flex-row gap-3 items-start">
         {/* CARD KIRI — Keranjang Member */}
-        <div className="rounded-3xl bg-[var(--primary)] shadow-2xl w-full md:w-1/2 md:h-[750px] md:max-h-[750px] overflow-hidden flex flex-col">
+        <div className="rounded-3xl bg-[var(--primary)] shadow-2xl w-full lg:w-1/2 lg:h-[750px] lg:max-h-[750px] overflow-hidden flex flex-col">
           <div className="shrink-0 flex justify-between items-start px-6 md:px-8 pt-6 md:pt-8 pb-5 border-b border-white/10">
             <div>
               <h2 className="text-xl font-bold">Pesan {typeLabels[type]}</h2>
@@ -224,7 +224,7 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
             })}
           </div>
 
-          <div className="shrink-0 border-t border-white/10 p-6 md:p-8">
+          <div className="shrink-0 border-t border-white/10 p-6 lg:p-8">
             <button
               type="button"
               onClick={() => setShowAddModal(true)}
@@ -240,9 +240,9 @@ export default function BookingFormExclusiveCart({ type, members }: Props) {
         <form
           id="booking-form-cart"
           onSubmit={handleSubmit}
-          className="rounded-3xl bg-[var(--primary)] shadow-2xl w-full md:w-1/2 md:h-[750px] md:max-h-[750px] overflow-hidden flex flex-col"
+          className="rounded-3xl bg-[var(--primary)] shadow-2xl w-full lg:w-1/2 lg:h-[750px] lg:max-h-[750px] overflow-hidden flex flex-col"
         >
-          <div className="shrink-0 px-6 md:px-8 pt-6 md:pt-8 pb-5 border-b border-white/10">
+          <div className="shrink-0 px-6 lg:px-8 pt-6 lg:pt-8 pb-5 border-b border-white/10">
             <h2 className="text-xl font-bold">Data Pemesanan</h2>
             <p className="text-sm text-white/60 mt-1">
               Lengkapi data akun untuk proses war

@@ -78,7 +78,7 @@ export default function Page() {
           <div className="mb-10">
             <h1 className="font-semibold text-3xl mb-3">{t("hero2")}</h1>
           </div>
-          <div className="grid md:grid-cols-4 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {BookingCard.map((item, i) => (
               <div key={i} className="max-w-sm flex">
                 <div className="relative rounded-3xl p-[3px] overflow-hidden w-full flex flex-col">
