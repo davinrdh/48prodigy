@@ -84,7 +84,7 @@ export default function Navbar() {
             <div className="flex gap-5">
 
                <div className="flex items-center">
-                  <div>
+                  <div className="hidden lg:block">
                     {navLink.map((link, index) => (
                       <Link
                         href={`/${currentLocale}${link.href}`}
@@ -113,14 +113,14 @@ export default function Navbar() {
             </div>
             {pathname !== `/${currentLocale}/landing` && (
               <div
-                className={`flex items-center me-4 md:hidden`}
+                className={`flex items-center me-4 lg:hidden`}
                 onClick={() => setIsOpen(true)}
               >
                 <Hamburger />
               </div>
             )}
             <div
-              className={`md:block p-[1.49rem] ${
+              className={`lg:block p-[1.49rem] ${
                 pathname !== `/${currentLocale}/landing` && "hidden"
               }`}
             >

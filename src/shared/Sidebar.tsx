@@ -35,7 +35,7 @@ export default function Sidebar({
   return (
     <>
       <div
-        className={`sidebar overflow-hidden fixed w-80 h-full right-0 z-50 top-0 bg-[var(--primary)] backdrop-sepia-50 md:hidden transition-transform duration-300 ease-in-out ${
+        className={`sidebar overflow-hidden fixed w-80 h-full right-0 z-50 top-0 bg-[var(--primary)] backdrop-sepia-50 lg:hidden transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

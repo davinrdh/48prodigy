@@ -34,7 +34,7 @@ export default function MemberGrid({ members }: MemberGridProps) {
   const [debouncedQuery, setDebouncedQuery] = useState(query);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedQuery(query), 1500);
+    const timer = setTimeout(() => setDebouncedQuery(query), 800);
     return () => clearTimeout(timer);
   }, [query]);
 
@@ -69,7 +69,7 @@ export default function MemberGrid({ members }: MemberGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-5 mt-5">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 mt-5">
       {filteredMembers.map((item) => {
         // Panggil di sini — 1 baris, langsung dapat objek { vc, twoShot, mng }
         const price = getExclusivePrice(item.code);
@@ -90,7 +90,9 @@ export default function MemberGrid({ members }: MemberGridProps) {
               />
             </div>
             <div className="p-3 md:p-5 flex justify-center items-center flex-col">
-              <p className="text-sm md:text-md font-semibold text-center leading-tight">
+              <p
+                className={`${item?.name.length > 14 ? "truncate" : ""} w-full max-w-[200px] md:text-md font-semibold text-center leading-tight`}
+              >
                 {item?.name}
               </p>
               <p className="text-center text-[12px] md:text-md">

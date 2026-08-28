@@ -18,7 +18,7 @@ export default function Button() {
     <Link href={`/${currentLocale}/booking`}>
       <button
         type="button"
-        className="bg-[var(--secondary)] p-5 rounded-2xl font-bold"
+        className="bg-[var(--secondary)] p-5 rounded-2xl font-bold w-full md:w-fit"
       >
         <div>PESAN SEKARANG</div>
       </button>

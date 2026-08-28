@@ -11,7 +11,7 @@ export default async function Product() {
     ProductCard.map(async (item) => ({
       ...item,
       isOpen: await getBookingStatus(item.id),
-    }))
+    })),
   );
 
   return (
@@ -24,9 +24,12 @@ export default async function Product() {
         </div>
       </div>
       <div className="px-5 md:px-20 mt-20">
-        <div className="flex justify-center flex-wrap gap-7">
+        <div className="flex justify-center items-center flex-wrap gap-7 w-full max-w-7xl mx-auto px-4">
           {productsWithStatus.map((item, i) => (
-            <div key={i} className="max-w-sm">
+            <div
+              key={i}
+              className="w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-18.6px)] max-w-sm flex justify-center"
+            >
               <CardProduct
                 descProduct={item.desc}
                 img={item.img}
