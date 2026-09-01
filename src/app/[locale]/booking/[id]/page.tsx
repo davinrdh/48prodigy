@@ -3,9 +3,9 @@ import { OrderEn, OrderId } from "@/app/productTranslate";
 import { getLocale } from "next-intl/server";
 import ArrowIcon from "@/icons/ArrowIcon";
 import membersData from "@/data/members-cache.json";
-import BookingFormJokiKonser from "@/components/BookingFormConcert";
-import BookingFormConcert from "@/components/BookingFormConcertJKT48";
-import BookingFormExclusiveCart from "@/components/BookingFormExclusiveCart";
+import BookingFormJokiKonser from "@/components/Form/BookingFormConcert";
+import BookingFormConcert from "@/components/Form/BookingFormConcertJKT48";
+import BookingFormExclusiveCart from "@/components/Form/BookingFormExclusiveCart";
 import { getBookingStatus } from "@/lib/getBookingStatus";
 
 const exclusiveIds: Record<string, "vc" | "twoShot" | "mng"> = {

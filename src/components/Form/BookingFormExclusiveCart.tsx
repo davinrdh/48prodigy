@@ -1,14 +1,13 @@
-// components/BookingFormExclusiveCart.tsx
 "use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import AddMemberModal from "./AddMemberModal";
-import ScheduleModal from "./ScheduleModal";
+import ScheduleModal from "../ScheduleModal";
 import type { JKT48Member, ExclusiveType, CartItem } from "@/types/booking";
 import { maxSameMemberByType } from "@/types/booking";
 import { getExclusivePrice } from "@/data/exclusivePrices";
-import SubmitStatusModal from "./SubmitStatusModal";
+import SubmitStatusModal from "../SubmitStatusModal";
 
 interface Props {
   type: ExclusiveType;
@@ -59,7 +58,6 @@ export default function BookingFormExclusiveCart({
     };
   }, [anyModalOpen]);
 
-  // Member yang masih boleh ditambahkan — dibatasi jumlah maksimal kemunculan yang sama
   const availableMembers = members.filter((m) => {
     const countInCart = cart.filter(
       (item) => item.member.code === m.code,
@@ -79,18 +77,18 @@ export default function BookingFormExclusiveCart({
 
   const totalHarga = cart.reduce((sum, item) => {
     const price = getExclusivePrice(item.member.code);
-    return sum + price[type]; // tidak dikali jumlahTiket lagi
+    return sum + price[type]; 
   }, 0);
 
   function formatWaLink(noWa: string) {
-    let normalized = noWa.trim().replace(/[\s-]/g, ""); // hapus spasi & strip
+    let normalized = noWa.trim().replace(/[\s-]/g, ""); 
 
     if (normalized.startsWith("+62")) {
-      normalized = normalized.slice(1); // hapus '+' saja, sisanya (62...) sudah benar
+      normalized = normalized.slice(1); 
     } else if (normalized.startsWith("62")) {
       // sudah benar, tidak perlu diubah
     } else if (normalized.startsWith("0")) {
-      normalized = "62" + normalized.slice(1); // ganti '0' di depan jadi '62'
+      normalized = "62" + normalized.slice(1); 
     }
 
     return `https://wa.me/${normalized}`;
@@ -157,7 +155,6 @@ export default function BookingFormExclusiveCart({
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-3 items-start">
-        {/* CARD KIRI — Keranjang Member */}
         <div className="rounded-3xl bg-[var(--primary)] shadow-2xl w-full lg:w-1/2 lg:h-[750px] lg:max-h-[750px] overflow-hidden flex flex-col">
           <div className="shrink-0 flex justify-between items-start px-6 md:px-8 pt-6 md:pt-8 pb-5 border-b border-white/10">
             <div>
@@ -179,7 +176,6 @@ export default function BookingFormExclusiveCart({
             </button>
           </div>
 
-          {/* Area scroll — mobile dibatasi ~2 item, desktop mengisi sisa tinggi 750px */}
           <div className="max-h-[230px] md:max-h-none md:flex-1 md:min-h-0 overflow-y-auto custom-scrollbar p-6 md:p-8 space-y-3">
             {cart.length === 0 && (
               <div className="text-center py-10 text-white/40 text-sm">
@@ -247,7 +243,6 @@ export default function BookingFormExclusiveCart({
           </div>
         </div>
 
-        {/* CARD KANAN — Data Akun & Submit */}
         <form
           id="booking-form-cart"
           onSubmit={handleSubmit}
@@ -298,7 +293,6 @@ export default function BookingFormExclusiveCart({
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-xs font-medium"
                 >
                   {showPassword ? (
-                    /* SVG Font Awesome: Eye Slash (Sembunyikan) */
                     <svg
                       className="w-5 h-5"
                       fill="currentColor"
@@ -307,7 +301,6 @@ export default function BookingFormExclusiveCart({
                       <path d="M38.8 5.1C28.4-3.5 13.3-1.2 5.1 9.2s-3.3 24.3 7.1 32.5l452 352c10.4 8.1 25.5 5.9 33.7-4.5s5.9-25.5-4.5-33.7L38.8 5.1zM439.3 352.2L358.5 288.5C368.5 272.2 374 252.8 374 232c0-61.9-50.1-112-112-112-20.8 0-40.2 5.5-56.5 15.5L125.7 67.8C161.4 46.1 204.4 32 250 32c141.4 0 262.4 81.7 322.9 200-24.9 49.3-59.5 91.2-101.6 122.2zM157.3 226.7l-71.1-55.4C44 201 17.1 240.5 0 288c60.5 118.3 181.5 200 322.9 200c40.3 0 78.4-7.9 113.1-22l-64.8-50.5c-23.7 13.2-51.1 20.5-80.2 20.5-91.9 0-166-74.1-166-166c0-17.6 2.7-34.6 7.6-50.7z" />
                     </svg>
                   ) : (
-                    /* SVG Font Awesome: Eye (Tampilkan) */
                     <svg
                       className="w-5 h-5"
                       fill="currentColor"

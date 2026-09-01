@@ -161,7 +161,6 @@ input[type='date'] {
   to   { transform: rotate(360deg); }
 }
 
-/* globals.css */
 .organic-frame {
   border-radius: 20px 20px 20px 80px;
 }
@@ -170,4 +169,57 @@ input[type='date'] {
   .organic-frame {
     border-radius: 24px 24px 24px 140px;
   }
+}
+
+.custom-datepicker {
+  background-color: var(--primary) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  font-family: inherit !important;
+  color: white !important;
+}
+
+.custom-datepicker .react-datepicker__header {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+}
+
+.custom-datepicker .react-datepicker__current-month,
+.custom-datepicker .react-datepicker__day-name {
+  color: white !important;
+}
+
+.custom-datepicker .react-datepicker__day {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.custom-datepicker .react-datepicker__day:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+}
+
+.custom-datepicker .react-datepicker__day--selected,
+.custom-datepicker .react-datepicker__day--keyboard-selected {
+  background-color: #dc2626 !important; /* merah, sesuai red-600 tombol kamu */
+  border-radius: 8px !important;
+  color: white !important;
+}
+
+.custom-datepicker .react-datepicker__day--disabled {
+  color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.custom-datepicker .react-datepicker__navigation-icon::before {
+  border-color: white !important;
+}
+
+.custom-datepicker .react-datepicker__triangle {
+  display: none !important;
+}
+
+/* Popper wrapper */
+.react-datepicker-popper {
+  z-index: 50 !important;
 }
