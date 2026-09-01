@@ -1,8 +1,7 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ButtonTranslate from "@/components/ButtonTranslate";
 import CloseIcon from "@/icons/CloseIcon";
-import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 
 interface ISidebar {
@@ -47,15 +46,7 @@ export default function Sidebar({
             <CloseIcon />
           </button>
           <div className="flex">
-            {/* <Link href="" className="brand-sidebar" onClick={() => setIsOpen(false)}>
-              <Image
-                src="/logo-transparant2.png"
-                alt="48Prodigy"
-                width={50}
-                height={50}
-              />
-            </Link> */}
-            <Link
+            <a
               href="/"
               className="flex items-center ms-2 text-brand md:hidden"
               onClick={() => setIsOpen(false)}
@@ -63,7 +54,7 @@ export default function Sidebar({
               <div>
                 <h3 className="m-0 font-semibold text-2xl ms-3">48Prodigy</h3>
               </div>
-            </Link>
+            </a>
           </div>
         </div>
         <div className="flex justify-between items-center p-5">
@@ -86,23 +77,13 @@ export default function Sidebar({
                 key={index}
                 className={`p-4 m-3 text-xl ${isActive ? "active" : ""}`}
               >
-                {link.href === "/reviews" ? (
-                  <a
-                    href={href}
-                    onClick={() => setIsOpen(false)}
-                    className="nav-link"
-                  >
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link
-                    href={href}
-                    onClick={() => setIsOpen(false)}
-                    className="nav-link"
-                  >
-                    {link.label}
-                  </Link>
-                )}
+                <a
+                  href={href}
+                  onClick={() => setIsOpen(false)}
+                  className="nav-link"
+                >
+                  {link.label}
+                </a>
               </div>
             );
           })}
