@@ -2,7 +2,6 @@
 
 import { useLocale } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 export default function Footer() {
@@ -55,9 +54,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
           {/* Brand & Tagline */}
           <div className="md:col-span-2">
-            <Link href={`/${locale}`} className="inline-block mb-4">
+            <a href={`/${locale}`} className="inline-block mb-4">
               <Image src="/hero.png" alt="48Prodigy" width={100} height={100} />
-            </Link>
+            </a>
             <p className="text-sm text-white/60 max-w-sm leading-relaxed">
               {t.tagline}
             </p>
@@ -71,23 +70,14 @@ export default function Footer() {
             <div className="flex flex-col gap-2.5">
               {navLink.map((link, index) => {
                 const href = `/${locale}${link.href}`;
-
-                if (link.href === "/reviews") {
-                  return (
-                    <a href={href} key={index}>
-                      {link.label}
-                    </a>
-                  );
-                }
                 return (
-                  <Link
+                  <a
                     href={href}
-                    locale={locale}
                     key={index}
                     className="text-sm text-white/80 hover:text-white transition-colors w-fit"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 );
               })}
             </div>
