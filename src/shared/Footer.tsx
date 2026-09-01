@@ -28,14 +28,16 @@ export default function Footer() {
 
   const content = {
     id: {
-      tagline: "Layanan joki tiket & sesi eksklusif JKT48 terpercaya sejak 2024.",
+      tagline:
+        "Layanan joki tiket & sesi eksklusif JKT48 terpercaya sejak 2024.",
       quickLinks: "Tautan Cepat",
       contact: "Kontak Kami",
       followUs: "Ikuti Kami",
       copyright: "Seluruh hak cipta dilindungi.",
     },
     en: {
-      tagline: "Trusted JKT48 ticket & exclusive session jockey service since 2024.",
+      tagline:
+        "Trusted JKT48 ticket & exclusive session jockey service since 2024.",
       quickLinks: "Quick Links",
       contact: "Contact Us",
       followUs: "Follow Us",
@@ -45,9 +47,7 @@ export default function Footer() {
 
   const t = locale === "en" ? content.en : content.id;
 
-  const socialLinks = [
-    { name: "X", href: "https://x.com/48Prodigy/"},
-  ];
+  const socialLinks = [{ name: "X", href: "https://x.com/48Prodigy/" }];
 
   return (
     <footer className="bg-[var(--primary)] mt-20">
@@ -69,16 +69,27 @@ export default function Footer() {
               {t.quickLinks}
             </h3>
             <div className="flex flex-col gap-2.5">
-              {navLink.map((link, index) => (
-                <Link
-                  href={`/${locale}${link.href}`}
-                  locale={locale}
-                  key={index}
-                  className="text-sm text-white/80 hover:text-white transition-colors w-fit"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLink.map((link, index) => {
+                const href = `/${locale}${link.href}`;
+
+                if (link.href === "/reviews") {
+                  return (
+                    <a href={href} key={index}>
+                      {link.label}
+                    </a>
+                  );
+                }
+                return (
+                  <Link
+                    href={href}
+                    locale={locale}
+                    key={index}
+                    className="text-sm text-white/80 hover:text-white transition-colors w-fit"
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -115,7 +126,12 @@ export default function Footer() {
                   aria-label={social.name}
                   className="w-9 h-9 flex items-center justify-center no-underline rounded-full bg-black/20 hover:bg-black/30 transition-colors text-sm"
                 >
-                  <Image src="/x-logo.png" alt="X Logo" width={40} height={40} />
+                  <Image
+                    src="/x-logo.png"
+                    alt="X Logo"
+                    width={40}
+                    height={40}
+                  />
                 </a>
               ))}
             </div>

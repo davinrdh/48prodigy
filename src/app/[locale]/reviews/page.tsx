@@ -2,14 +2,13 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import TweetEmbed from "@/components/TweetEmbed";
 import { testimonials } from "@/data/testimonials";
 import { useLocale } from "next-intl";
 
 export default function TestimoniPage() {
   const locale = useLocale();
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   const currentPage = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
@@ -43,9 +42,7 @@ export default function TestimoniPage() {
   function goToPage(page: number) {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", String(page));
-    router.push(`?${params.toString()}`, { scroll: false });
-    router.refresh(); // paksa Next.js re-fetch/re-render segment ini
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.location.href = `${window.location.pathname}?${params.toString()}`;
   }
 
   function getPageNumbers(): (number | "...")[] {
@@ -87,7 +84,7 @@ export default function TestimoniPage() {
 
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 max-w-6xl mx-auto">
         {displayedTestimonials.map((testimonial) => (
-          <TweetEmbed key={`${testimonial.id}-${currentPage}`} tweetUrl={testimonial.tweetUrl} />
+          <TweetEmbed key={testimonial.id} tweetUrl={testimonial.tweetUrl} />
         ))}
       </div>
 
