@@ -62,13 +62,13 @@ export default function MemberPicker({ members, selectedCode, onSelect, locale }
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cari member..."
+            placeholder={locale === "en" ? "Search member..." : "Cari member..."}
             className="w-full bg-black/30 px-3 py-2 text-sm outline-none border-b border-white/10"
             autoFocus
           />
           <div className="max-h-64 overflow-y-auto">
             {filtered.length === 0 && (
-              <p className="text-center text-sm text-white/50 py-4">Member tidak ditemukan</p>
+              <p className="text-center text-sm text-white/50 py-4">{locale === "en" ? "Member not found" : "Member tidak ditemukan"}</p>
             )}
             {filtered.map((member) => (
               <button
