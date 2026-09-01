@@ -1,24 +1,28 @@
+// app/[locale]/testimoni/page.tsx
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import TweetEmbed from "@/components/TweetEmbed";
 import { testimonials } from "@/data/testimonials";
 import { useLocale } from "next-intl";
 
 export default function TestimoniPage() {
   const locale = useLocale();
-  const [currentPage, setCurrentPage] = useState(1);
-  
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const currentPage = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
+
   const [perPage, setPerPage] = useState(10);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    
+
     function updatePerPage() {
       const width = window.innerWidth;
       const newPerPage = width < 768 ? 10 : width < 1024 ? 20 : 21;
-      
       setPerPage((prev) => (prev !== newPerPage ? newPerPage : prev));
     }
 
@@ -26,10 +30,6 @@ export default function TestimoniPage() {
     window.addEventListener("resize", updatePerPage);
     return () => window.removeEventListener("resize", updatePerPage);
   }, []);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [perPage]);
 
   const reversedTestimonials = useMemo(() => [...testimonials].reverse(), []);
 
@@ -41,7 +41,10 @@ export default function TestimoniPage() {
   }, [reversedTestimonials, currentPage, perPage]);
 
   function goToPage(page: number) {
-    setCurrentPage(page);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(page));
+    router.push(`?${params.toString()}`, { scroll: false });
+    router.refresh(); // paksa Next.js re-fetch/re-render segment ini
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -84,11 +87,10 @@ export default function TestimoniPage() {
 
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 max-w-6xl mx-auto">
         {displayedTestimonials.map((testimonial) => (
-          <TweetEmbed key={testimonial.id} tweetUrl={testimonial.tweetUrl} />
+          <TweetEmbed key={`${testimonial.id}-${currentPage}`} tweetUrl={testimonial.tweetUrl} />
         ))}
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-2 mt-12 flex-wrap">
           <button
@@ -102,10 +104,7 @@ export default function TestimoniPage() {
 
           {getPageNumbers().map((page, index) =>
             page === "..." ? (
-              <span
-                key={`ellipsis-${index}`}
-                className="px-2 text-white/40 text-sm"
-              >
+              <span key={`ellipsis-${index}`} className="px-2 text-white/40 text-sm">
                 ...
               </span>
             ) : (
@@ -121,7 +120,7 @@ export default function TestimoniPage() {
               >
                 {page}
               </button>
-            ),
+            )
           )}
 
           <button
