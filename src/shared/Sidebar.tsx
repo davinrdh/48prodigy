@@ -74,26 +74,38 @@ export default function Sidebar({
           />
         </div>
         <div>
-          {navLink.map((link: any, index: number) => (
-            <div
-              key={index}
-              className={`p-4 m-3 text-xl ${
-                pathname === `/${locale}${link.href.replace(/\/$/, "")}` ||
-                (pathname.startsWith(`/${locale}${link.href}`) &&
-                  link.href !== "/")
-                  ? "active"
-                  : ""
-              }`}
-            >
-              <Link
-                href={`/${locale}${link.href}`}
-                onClick={() => setIsOpen(false)}
-                className="nav-link"
+          {navLink.map((link: any, index: number) => {
+            const href = `/${locale}${link.href}`;
+            const isActive =
+              pathname === `/${locale}${link.href.replace(/\/$/, "")}` ||
+              (pathname.startsWith(`/${locale}${link.href}`) &&
+                link.href !== "/");
+
+            return (
+              <div
+                key={index}
+                className={`p-4 m-3 text-xl ${isActive ? "active" : ""}`}
               >
-                {link.label}
-              </Link>
-            </div>
-          ))}
+                {link.href === "/reviews" ? (
+                  <a
+                    href={href}
+                    onClick={() => setIsOpen(false)}
+                    className="nav-link"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={href}
+                    onClick={() => setIsOpen(false)}
+                    className="nav-link"
+                  >
+                    {link.label}
+                  </Link>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
       {isOpen && (

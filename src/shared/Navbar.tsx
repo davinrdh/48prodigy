@@ -73,42 +73,49 @@ export default function Navbar() {
         <div className="navbar">
           <div className="flex justify-between w-full">
             <Link href="/" locale={currentLocale} className="brand">
-                <Image
-                  src="/logo-transparant2.png"
-                  alt="48Prodigy"
-                  width={85}
-                  height={80}
-                />
-              </Link>
+              <Image
+                src="/logo-transparant2.png"
+                alt="48Prodigy"
+                width={85}
+                height={80}
+              />
+            </Link>
             <div className="flex gap-5">
+              <div className="flex items-center">
+                <div className="hidden lg:block">
+                  {navLink.map((link, index) => {
+                    const href = `/${currentLocale}${link.href}`;
+                    const isActive =
+                      pathname ===
+                        `/${currentLocale}${link.href.replace(/\/$/, "")}` ||
+                      (pathname.startsWith(`/${currentLocale}${link.href}`) &&
+                        link.href !== "/");
 
-               <div className="flex items-center">
-                  <div className="hidden lg:block">
-                    {navLink.map((link, index) => (
+                    const className = isActive ? "nav-link active" : "nav-link";
+
+
+                    if (link.href === "/reviews") {
+                      return (
+                        <a href={href} key={index} className={className}>
+                          {link.label}
+                        </a>
+                      );
+                    }
+
+                    return (
                       <Link
-                        href={`/${currentLocale}${link.href}`}
+                        href={href}
                         locale={currentLocale}
                         key={index}
-                        className={
-                          pathname ===
-                            `/${currentLocale}${link.href.replace(
-                              /\/$/,
-                              "",
-                            )}` ||
-                          (pathname.startsWith(
-                            `/${currentLocale}${link.href}`,
-                          ) &&
-                            link.href !== "/")
-                            ? "nav-link active"
-                            : "nav-link"
-                        }
+                        className={className}
                       >
                         {link.label}
                       </Link>
-                    ))}
-                    {/* <button type="button" className="hidden md:inline-block " onClick={() => setModalForm(true)}>Register</button> */}
-                  </div>
+                    );
+                  })}
+                  {/* <button type="button" className="hidden md:inline-block " onClick={() => setModalForm(true)}>Register</button> */}
                 </div>
+              </div>
             </div>
             {pathname !== `/${currentLocale}/landing` && (
               <div
