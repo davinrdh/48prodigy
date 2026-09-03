@@ -31,6 +31,8 @@ export default function AddMemberModal({
   const maxTiket = maxTiketByType[type];
   const isValid = selectedMember && tanggal && sesi;
 
+  const [isCadangan, setIsCadangan] = useState(false);
+
   function handleAdd() {
     if (!selectedMember || !tanggal || !sesi) return;
 
@@ -40,6 +42,7 @@ export default function AddMemberModal({
       tanggal,
       sesi,
       jumlahTiket: Math.min(jumlahTiket, maxTiket),
+      isCadangan,
     });
     onClose();
   }
@@ -66,7 +69,7 @@ export default function AddMemberModal({
           </button>
         </div>
 
-        <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar px-5 pt-4 pb-2 space-y-4">
+        <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar px-5 pt-4 pb-3 space-y-4">
           {members.length === 0 ? (
             <p className="text-center text-sm text-white/50 py-6">
               {locale === "en"
@@ -87,7 +90,11 @@ export default function AddMemberModal({
               {locale === "en" ? "Date" : "Tanggal"}
             </label>
             <div>
-              <CustomDateInput value={tanggal} onChange={setTanggal} locale={locale} />
+              <CustomDateInput
+                value={tanggal}
+                onChange={setTanggal}
+                locale={locale}
+              />
             </div>
           </div>
 
@@ -127,6 +134,17 @@ export default function AddMemberModal({
               className="w-full bg-black/30 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
             />
           </div>
+          <label className="flex items-center gap-2.5 cursor-pointer ps-2">
+            <input
+              type="checkbox"
+              checked={isCadangan}
+              onChange={(e) => setIsCadangan(e.target.checked)}
+              className="w-4 h-4 rounded accent-red-600"
+            />
+            <span className="text-sm text-white/80">
+              {locale === "en" ? "Backup Member" : "Member Cadangan"}{" "}
+            </span>
+          </label>
         </div>
 
         <div className="shrink-0 border-t border-white/10 p-5">

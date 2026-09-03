@@ -39,11 +39,12 @@ export interface GeneralConcertForm {
 }
 
 export interface CartItem {
-  id: string; // untuk key React & keperluan hapus item
+  id: string;
   member: JKT48Member;
   tanggal: string;
   sesi: string;
   jumlahTiket: number;
+  isCadangan: boolean; 
 }
 
 export const maxSameMemberByType: Record<ExclusiveType, number> = {

@@ -8,6 +8,7 @@ import type { JKT48Member, ExclusiveType, CartItem } from "@/types/booking";
 import { maxSameMemberByType } from "@/types/booking";
 import { getExclusivePrice } from "@/data/exclusivePrices";
 import SubmitStatusModal from "../SubmitStatusModal";
+import { formatTanggalDenganHari } from "@/lib/formatTanggal";
 
 interface Props {
   type: ExclusiveType;
@@ -77,18 +78,18 @@ export default function BookingFormExclusiveCart({
 
   const totalHarga = cart.reduce((sum, item) => {
     const price = getExclusivePrice(item.member.code);
-    return sum + price[type]; 
+    return sum + price[type];
   }, 0);
 
   function formatWaLink(noWa: string) {
-    let normalized = noWa.trim().replace(/[\s-]/g, ""); 
+    let normalized = noWa.trim().replace(/[\s-]/g, "");
 
     if (normalized.startsWith("+62")) {
-      normalized = normalized.slice(1); 
+      normalized = normalized.slice(1);
     } else if (normalized.startsWith("62")) {
       // sudah benar, tidak perlu diubah
     } else if (normalized.startsWith("0")) {
-      normalized = "62" + normalized.slice(1); 
+      normalized = "62" + normalized.slice(1);
     }
 
     return `https://wa.me/${normalized}`;
@@ -106,10 +107,11 @@ export default function BookingFormExclusiveCart({
     setSubmitting(true);
     try {
       const memberSummary = cart
-        .map(
-          (item) =>
-            `${item.member.name} | ${item.sesi} | ${item.tanggal} | ${item.jumlahTiket} tiket`,
-        )
+        .map((item) => {
+          const tanggalFormatted = formatTanggalDenganHari(item.tanggal);
+          const label = item.isCadangan ? " [CADANGAN]" : "";
+          return `${item.member.name}${label} | ${item.sesi} | ${tanggalFormatted} | ${item.jumlahTiket} tiket`;
+        })
         .join("\n");
 
       const payload = {
@@ -204,9 +206,16 @@ export default function BookingFormExclusiveCart({
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-sm truncate">
-                      {item.member.name}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="font-semibold text-sm truncate">
+                        {item.member.name}
+                      </p>
+                      {item.isCadangan && (
+                        <span className="shrink-0 bg-yellow-500/20 text-yellow-400 text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                          Cadangan
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs text-white/60">
                       {item.member.nickname}
                     </p>
@@ -325,10 +334,13 @@ export default function BookingFormExclusiveCart({
                   : "Nomor WhatsApp Aktif"}
               </label>
               <input
-                type="tel"
+                type="numeric"
                 required
                 value={noWa}
-                onChange={(e) => setNoWa(e.target.value)}
+                onChange={(e) => {
+                  const onlyDigits = e.target.value.replace(/\D/g, "");
+                  setNoWa(onlyDigits);
+                }}
                 placeholder="08xxxxxxxxxx"
                 className="w-full bg-black/30 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-red-500"
               />
