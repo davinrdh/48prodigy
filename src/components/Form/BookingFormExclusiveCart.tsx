@@ -14,6 +14,7 @@ interface Props {
   type: ExclusiveType;
   members: JKT48Member[];
   locale: string;
+  scheduleImageIds: string[];
 }
 
 const typeLabels: Record<ExclusiveType, string> = {
@@ -30,6 +31,7 @@ export default function BookingFormExclusiveCart({
   type,
   members,
   locale,
+  scheduleImageIds 
 }: Props) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -153,6 +155,8 @@ export default function BookingFormExclusiveCart({
       setSubmitting(false);
     }
   }
+
+  
 
   return (
     <>
@@ -400,7 +404,7 @@ export default function BookingFormExclusiveCart({
       )}
 
       {showScheduleModal && (
-        <ScheduleModal onClose={() => setShowScheduleModal(false)} />
+        <ScheduleModal imageIds={scheduleImageIds} onClose={() => setShowScheduleModal(false)} />
       )}
 
       {submitStatus && (
