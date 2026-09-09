@@ -7,6 +7,7 @@ import BookingFormJokiKonser from "@/components/Form/BookingFormConcert";
 import BookingFormConcert from "@/components/Form/BookingFormConcertJKT48";
 import BookingFormExclusiveCart from "@/components/Form/BookingFormExclusiveCart";
 import { getBookingStatus } from "@/lib/getBookingStatus";
+import { getScheduleImageIds } from "@/lib/getScheduleImages";
 
 const exclusiveIds: Record<string, "vc" | "twoShot" | "mng"> = {
   "video-call": "vc",
@@ -34,6 +35,10 @@ export default async function ProductDetail({
   const isConcert = id === "concert-jkt48";
   const isJokiKonser = id === "general-concert";
 
+  const scheduleImageIds = exclusiveType
+    ? await getScheduleImageIds(exclusiveType)
+    : [];
+
   return (
     <div className="overflow-hidden">
       <div className="md:px-20 mt-5 px-5">
@@ -51,7 +56,9 @@ export default async function ProductDetail({
             <div className="rounded-3xl bg-[var(--primary)] shadow-2xl p-10 text-center h-screen flex flex-col justify-center items-center">
               <p className="text-2xl font-bold mb-2">🚧 Coming Soon</p>
               <p className="text-white/60 text-sm">
-                {locale === 'en' ? "This service is not yet open for bookings. Please check back later." : "Layanan ini belum dibuka untuk pemesanan. Silakan kembali lagi nanti."}
+                {locale === "en"
+                  ? "This service is not yet open for bookings. Please check back later."
+                  : "Layanan ini belum dibuka untuk pemesanan. Silakan kembali lagi nanti."}
               </p>
             </div>
           ) : (
@@ -60,6 +67,7 @@ export default async function ProductDetail({
                 <BookingFormExclusiveCart
                   type={exclusiveType}
                   members={membersData.data ?? []}
+                  scheduleImageIds={scheduleImageIds}
                   locale={locale}
                 />
               )}
